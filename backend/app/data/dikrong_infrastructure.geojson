@@ -1,0 +1,116 @@
+{
+  "type": "FeatureCollection",
+  "name": "Dikrong_Critical_Infrastructure",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "INFRA-BRG-01",
+        "name": "Dikrong Highway Bridge (NH-415)",
+        "category": "Bridge",
+        "criticality": "Vital Lifeline",
+        "deck_level_m": 146.5,
+        "pier_scour_risk": "High during high-velocity discharge",
+        "max_safe_discharge_cumecs": 2800,
+        "is_structurally_compromised": false
+      },
+      "geometry": { "type": "Point", "coordinates": [93.748, 27.143] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "INFRA-BRG-02",
+        "name": "Pichola Timber / Bailey Embankment Bridge",
+        "category": "Bridge",
+        "criticality": "High",
+        "deck_level_m": 89.2,
+        "pier_scour_risk": "Critical (Submerged in > 1.2m surge)",
+        "max_safe_discharge_cumecs": 1400,
+        "is_structurally_compromised": false
+      },
+      "geometry": { "type": "Point", "coordinates": [93.903, 27.050] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "INFRA-BRG-03",
+        "name": "Harmuti Railway Bridge No. 44",
+        "category": "Railway Bridge",
+        "criticality": "Strategic Lifeline",
+        "deck_level_m": 101.5,
+        "pier_scour_risk": "Moderate",
+        "max_safe_discharge_cumecs": 3200,
+        "is_structurally_compromised": false
+      },
+      "geometry": { "type": "Point", "coordinates": [93.886, 27.081] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "INFRA-HOSP-01",
+        "name": "Doimukh Community Health Centre (CHC)",
+        "category": "Hospital",
+        "criticality": "Emergency Medical Hub",
+        "beds": 30,
+        "icu_equipped": false,
+        "ambulance_count": 2,
+        "elevation_m": 145.0
+      },
+      "geometry": { "type": "Point", "coordinates": [93.750, 27.148] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "INFRA-HOSP-02",
+        "name": "Harmuti Model Hospital & PHC",
+        "category": "Hospital",
+        "criticality": "Emergency Medical Hub",
+        "beds": 40,
+        "icu_equipped": true,
+        "ambulance_count": 3,
+        "elevation_m": 100.5
+      },
+      "geometry": { "type": "Point", "coordinates": [93.882, 27.085] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "INFRA-HOSP-03",
+        "name": "Bihpuria First Referral Unit (FRU)",
+        "category": "Hospital",
+        "criticality": "Critical Care Hospital",
+        "beds": 75,
+        "icu_equipped": true,
+        "ambulance_count": 4,
+        "elevation_m": 84.0
+      },
+      "geometry": { "type": "Point", "coordinates": [93.915, 26.989] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "INFRA-PWR-01",
+        "name": "Nirjuli 132/33kV Electrical Substation",
+        "category": "Power Substation",
+        "criticality": "Regional Grid Node",
+        "plinth_level_m": 137.2,
+        "flood_protection_bund": "1.5m Earth bund",
+        "elevation_m": 137.0
+      },
+      "geometry": { "type": "Point", "coordinates": [93.739, 27.129] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "INFRA-EMB-01",
+        "name": "Pichola-Dikrong Right Embankment Section 4",
+        "category": "Flood Protection Embankment",
+        "criticality": "Breach Vulnerability Hotspot",
+        "design_crest_level_m": 89.8,
+        "condition": "Erosion stressed during high flow (> 1800 cumecs)"
+      },
+      "geometry": { "type": "Point", "coordinates": [93.901, 27.053] }
+    }
+  ]
+}

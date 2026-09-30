@@ -1,0 +1,283 @@
+{
+  "scenarios": [
+    {
+      "id": "scenario-normal",
+      "name": "Scenario 1: Normal Monsoon Baseflow",
+      "tag": "NORMAL_CONDITIONS",
+      "description": "Baseline Himalayan foothill conditions. Moderate intermittent rainfall, well-draining soil, stable river stages below warning thresholds. Safe for normal transit and operations.",
+      "rainfall_intensity_mm_per_hr": 4.2,
+      "accumulated_24h_rainfall_mm": 22.5,
+      "forecast_6h_rainfall_mm": 12.0,
+      "soil_moisture_percent": 34.0,
+      "soil_saturation_ratio": 0.38,
+      "upstream_gauge_m": 2.4,
+      "midstream_gauge_m": 3.1,
+      "downstream_gauge_m": 2.8,
+      "rate_of_rise_m_per_hr": 0.05,
+      "river_discharge_cumecs": 280.0,
+      "risk_score": 0.12,
+      "risk_category": "Low",
+      "warning_lead_time_min": null,
+      "simulation": {
+        "status": "COMPLETED",
+        "peak_discharge_cumecs": 350.0,
+        "max_flood_depth_m": 0.0,
+        "flooded_area_sq_km": 0.0,
+        "flood_polygons": [],
+        "affected_villages": [],
+        "exposed_population": 0,
+        "severed_bridges": [],
+        "inundated_roads": []
+      },
+      "alerts": []
+    },
+    {
+      "id": "scenario-rising",
+      "name": "Scenario 2: Pre-Monsoon Heavy Downpour & Saturated Catchment",
+      "tag": "RISING_FLOOD_RISK",
+      "description": "Intense convective cloud mass hovering over upper Dikrong ridge (Sagalee-Doimukh). Soil saturation exceeds 75%, antecedent moisture high. Upstream river level rising rapidly at 0.65 m/hr. Early warning advisory triggered.",
+      "rainfall_intensity_mm_per_hr": 38.5,
+      "accumulated_24h_rainfall_mm": 115.0,
+      "forecast_6h_rainfall_mm": 65.0,
+      "soil_moisture_percent": 76.5,
+      "soil_saturation_ratio": 0.78,
+      "upstream_gauge_m": 5.8,
+      "midstream_gauge_m": 6.9,
+      "downstream_gauge_m": 5.4,
+      "rate_of_rise_m_per_hr": 0.65,
+      "river_discharge_cumecs": 1450.0,
+      "risk_score": 0.68,
+      "risk_category": "High",
+      "warning_lead_time_min": 140,
+      "simulation": {
+        "status": "COMPLETED",
+        "peak_discharge_cumecs": 1850.0,
+        "max_flood_depth_m": 1.2,
+        "flooded_area_sq_km": 4.8,
+        "flood_polygons": [
+          {
+            "id": "FP-RISING-01",
+            "depth_range": "0.3m - 0.8m",
+            "severity": "Moderate",
+            "arrival_time_hrs": 1.5,
+            "coordinates": [
+              [93.744, 27.147],
+              [93.750, 27.143],
+              [93.746, 27.136],
+              [93.740, 27.139],
+              [93.744, 27.147]
+            ]
+          },
+          {
+            "id": "FP-RISING-02",
+            "depth_range": "0.5m - 1.2m",
+            "severity": "High",
+            "arrival_time_hrs": 2.2,
+            "coordinates": [
+              [93.898, 27.058],
+              [93.906, 27.050],
+              [93.900, 27.042],
+              [93.892, 27.049],
+              [93.898, 27.058]
+            ]
+          }
+        ],
+        "affected_villages": [
+          {
+            "id": "VIL-02",
+            "name": "Nirjuli Riverside",
+            "estimated_inundated_depth_m": 0.65,
+            "arrival_time_hrs": 1.8,
+            "exposed_population": 3200,
+            "priority": "High"
+          },
+          {
+            "id": "VIL-06",
+            "name": "Pichola Embankment Area",
+            "estimated_inundated_depth_m": 0.95,
+            "arrival_time_hrs": 2.5,
+            "exposed_population": 1850,
+            "priority": "High"
+          }
+        ],
+        "exposed_population": 5050,
+        "severed_bridges": [],
+        "inundated_roads": [
+          {
+            "id": "ROAD-SH-01",
+            "name": "Harmuti-Pichola Embankment Road",
+            "water_depth_m": 0.55,
+            "status": "Closed - Unsafe for Light Vehicles",
+            "recommended_action": "Avoid - Diversion via NH-15"
+          }
+        ]
+      },
+      "alerts": [
+        {
+          "id": "ALERT-WARN-02",
+          "headline": "FLASH FLOOD WATCH: Dikrong River Basin",
+          "risk_level": "High",
+          "severity": "Orange Advisory",
+          "issued_by": "State Disaster Management Authority (SDMA)",
+          "timestamp": "2026-09-28T14:00:00Z",
+          "message": "Continuous heavy rainfall in Sagalee upland. Nirjuli low bank and Pichola embankment on high alert. Keep emergency kits ready.",
+          "status": "APPROVED",
+          "nearest_shelter": "NERIST Indoor Sports Complex & Multi-purpose Hall"
+        }
+      ]
+    },
+    {
+      "id": "scenario-critical",
+      "name": "Scenario 3: Severe Cloudburst & Downstream Flash Flood Emergency",
+      "tag": "FLASH_FLOOD_EMERGENCY",
+      "description": "Himalayan cloudburst in Sagalee-Doimukh ridge (>95 mm/hr). River surge exceeding high flood level (HFL). Pichola right embankment breaches. Water overtopping NH-415 and cutting Pichola timber bridge. Urgent mass evacuation required.",
+      "rainfall_intensity_mm_per_hr": 96.4,
+      "accumulated_24h_rainfall_mm": 242.0,
+      "forecast_6h_rainfall_mm": 110.0,
+      "soil_moisture_percent": 94.2,
+      "soil_saturation_ratio": 0.96,
+      "upstream_gauge_m": 9.4,
+      "midstream_gauge_m": 10.8,
+      "downstream_gauge_m": 9.1,
+      "rate_of_rise_m_per_hr": 1.85,
+      "river_discharge_cumecs": 3480.0,
+      "risk_score": 0.98,
+      "risk_category": "Critical",
+      "warning_lead_time_min": 45,
+      "simulation": {
+        "status": "COMPLETED",
+        "peak_discharge_cumecs": 3850.0,
+        "max_flood_depth_m": 2.85,
+        "flooded_area_sq_km": 18.6,
+        "flood_polygons": [
+          {
+            "id": "FP-CRIT-01",
+            "depth_range": "1.2m - 2.5m",
+            "severity": "Critical",
+            "arrival_time_hrs": 0.5,
+            "coordinates": [
+              [93.738, 27.150],
+              [93.754, 27.142],
+              [93.748, 27.128],
+              [93.734, 27.135],
+              [93.738, 27.150]
+            ]
+          },
+          {
+            "id": "FP-CRIT-02",
+            "depth_range": "1.8m - 2.85m",
+            "severity": "Extreme Danger",
+            "arrival_time_hrs": 1.2,
+            "coordinates": [
+              [93.890, 27.065],
+              [93.915, 27.055],
+              [93.910, 27.035],
+              [93.885, 27.045],
+              [93.890, 27.065]
+            ]
+          },
+          {
+            "id": "FP-CRIT-03",
+            "depth_range": "0.8m - 1.9m",
+            "severity": "Critical",
+            "arrival_time_hrs": 2.0,
+            "coordinates": [
+              [93.905, 27.010],
+              [93.935, 27.000],
+              [93.928, 26.975],
+              [93.900, 26.980],
+              [93.905, 27.010]
+            ]
+          }
+        ],
+        "affected_villages": [
+          {
+            "id": "VIL-01",
+            "name": "Doimukh Township",
+            "estimated_inundated_depth_m": 1.45,
+            "arrival_time_hrs": 0.4,
+            "exposed_population": 4200,
+            "priority": "Immediate Evacuation"
+          },
+          {
+            "id": "VIL-02",
+            "name": "Nirjuli Riverside",
+            "estimated_inundated_depth_m": 2.10,
+            "arrival_time_hrs": 0.6,
+            "exposed_population": 9800,
+            "priority": "Immediate Evacuation"
+          },
+          {
+            "id": "VIL-05",
+            "name": "Harmuti Bazar & Railway Colony",
+            "estimated_inundated_depth_m": 1.20,
+            "arrival_time_hrs": 1.5,
+            "exposed_population": 5200,
+            "priority": "High Evacuation"
+          },
+          {
+            "id": "VIL-06",
+            "name": "Pichola Embankment Area",
+            "estimated_inundated_depth_m": 2.85,
+            "arrival_time_hrs": 1.1,
+            "exposed_population": 3150,
+            "priority": "Extreme Rescue & Airlift"
+          },
+          {
+            "id": "VIL-08",
+            "name": "Bihpuria Rural & Char",
+            "estimated_inundated_depth_m": 1.65,
+            "arrival_time_hrs": 2.4,
+            "exposed_population": 7400,
+            "priority": "High Evacuation"
+          }
+        ],
+        "exposed_population": 29750,
+        "severed_bridges": [
+          {
+            "id": "INFRA-BRG-02",
+            "name": "Pichola Timber / Bailey Embankment Bridge",
+            "status": "COMPROMISED - SUBMERGED 1.4m",
+            "passable": false
+          }
+        ],
+        "inundated_roads": [
+          {
+            "id": "ROAD-SH-01",
+            "name": "Harmuti-Pichola Embankment Road",
+            "water_depth_m": 1.85,
+            "status": "IMPASSABLE - CUT OFF",
+            "recommended_action": "DO NOT ATTEMPT TO CROSS"
+          },
+          {
+            "id": "ROAD-RURAL-01",
+            "name": "Pichola to Bihpuria Rural Link",
+            "water_depth_m": 1.20,
+            "status": "IMPASSABLE - FLOODED",
+            "recommended_action": "Reroute to Bihpuria College via Southern Ridge"
+          },
+          {
+            "id": "ROAD-NH-415-01",
+            "name": "NH-415 (Doimukh to Nirjuli Main Arterial)",
+            "water_depth_m": 0.45,
+            "status": "Severe Waterlogging - Single Lane High Clearance Only",
+            "recommended_action": "Use Ridge Access Road to Shelter-01"
+          }
+        ]
+      },
+      "alerts": [
+        {
+          "id": "ALERT-CRIT-01",
+          "headline": "FLASH FLOOD EMERGENCY - RED ALERT: DIKRONG BASIN",
+          "risk_level": "Critical",
+          "severity": "Red Alert Order",
+          "issued_by": "District Disaster Management Authority (DDMA)",
+          "timestamp": "2026-09-28T14:20:00Z",
+          "message": "Sudden cloudburst surge in Dikrong river. Embankment breach at Pichola. All residents in Nirjuli low areas and Pichola MUST evacuate immediately to designated high-ground shelters. Avoid NH-415 low culvert.",
+          "status": "APPROVED",
+          "nearest_shelter": "NERIST Indoor Sports Complex / Bihpuria College"
+        }
+      ]
+    }
+  ]
+}

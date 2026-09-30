@@ -1,0 +1,79 @@
+{
+  "type": "FeatureCollection",
+  "name": "Dikrong_River_Network",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "RIV-MAIN-01",
+        "name": "Dikrong Main Channel",
+        "reach_type": "Mainstream",
+        "length_km": 68.4,
+        "average_bed_slope": 0.018,
+        "manning_n": 0.038,
+        "danger_level_m": 8.5,
+        "warning_level_m": 7.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.640, 27.280],
+          [93.680, 27.230],
+          [93.715, 27.185],
+          [93.748, 27.145],
+          [93.775, 27.130],
+          [93.820, 27.110],
+          [93.855, 27.095],
+          [93.885, 27.080],
+          [93.905, 27.050],
+          [93.918, 26.985],
+          [93.940, 26.930]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "RIV-TRIB-01",
+        "name": "Pachin River (Tributary)",
+        "reach_type": "Major Tributary",
+        "length_km": 24.2,
+        "average_bed_slope": 0.024,
+        "manning_n": 0.042,
+        "danger_level_m": 6.2,
+        "warning_level_m": 5.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.610, 27.100],
+          [93.660, 27.115],
+          [93.710, 27.135],
+          [93.748, 27.145]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "RIV-TRIB-02",
+        "name": "Karsingsa Nallah",
+        "reach_type": "Hill Torrent",
+        "length_km": 11.5,
+        "average_bed_slope": 0.045,
+        "manning_n": 0.055,
+        "danger_level_m": 4.0,
+        "warning_level_m": 3.0
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.770, 27.165],
+          [93.785, 27.140],
+          [93.820, 27.110]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "type": "FeatureCollection",
+  "name": "Dikrong_Safe_Shelters",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SHELTER-01",
+        "name": "Doimukh Higher Secondary School (High Ridge Campus)",
+        "type": "Educational Complex / Designated Cyclone & Flood Shelter",
+        "elevation_m": 165.0,
+        "total_capacity": 1800,
+        "current_occupancy": 120,
+        "power_backup": "50kVA Silent Diesel Generator + Solar Inverter",
+        "drinking_water": "Deep Borewell with RO Filtration Unit (5,000 L Tank)",
+        "medical_facilities": "First Aid Station + 2 ANM Nurses on Duty",
+        "food_stock_days": 7,
+        "is_wheelchair_accessible": true,
+        "status": "Operational - Green"
+      },
+      "geometry": { "type": "Point", "coordinates": [93.755, 27.155] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SHELTER-02",
+        "name": "NERIST Indoor Sports Complex & Multi-purpose Hall",
+        "type": "University Facility (High Elevation Plateau)",
+        "elevation_m": 154.0,
+        "total_capacity": 3200,
+        "current_occupancy": 350,
+        "power_backup": "100kVA Grid-linked Genset",
+        "drinking_water": "Campus Municipal Supply + 10,000 L Storage",
+        "medical_facilities": "NERIST Health Centre (Medical Officer + 4 Beds)",
+        "food_stock_days": 10,
+        "is_wheelchair_accessible": true,
+        "status": "Operational - Green"
+      },
+      "geometry": { "type": "Point", "coordinates": [93.738, 27.138] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SHELTER-03",
+        "name": "Banderdewa High Ground Community Center",
+        "type": "Civic Center (Elevated Foothill Ridge)",
+        "elevation_m": 138.0,
+        "total_capacity": 1400,
+        "current_occupancy": 80,
+        "power_backup": "30kVA Generator",
+        "drinking_water": "Overhead Tank (4,000 L) + Chlorinated Supply",
+        "medical_facilities": "Paramedic Field Unit",
+        "food_stock_days": 5,
+        "is_wheelchair_accessible": false,
+        "status": "Operational - Green"
+      },
+      "geometry": { "type": "Point", "coordinates": [93.818, 27.118] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SHELTER-04",
+        "name": "Harmuti Railway High School & Relief Camp",
+        "type": "Railways Masonry Building (Engineered Flood Safe)",
+        "elevation_m": 112.0,
+        "total_capacity": 2200,
+        "current_occupancy": 210,
+        "power_backup": "40kVA Genset",
+        "drinking_water": "Borewell + Water Tanker Logistics Point",
+        "medical_facilities": "Railway First Responder Clinic",
+        "food_stock_days": 6,
+        "is_wheelchair_accessible": true,
+        "status": "Operational - Green"
+      },
+      "geometry": { "type": "Point", "coordinates": [93.875, 27.095] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SHELTER-05",
+        "name": "Bihpuria College Multi-storey Complex",
+        "type": "College Building (High Plinth Stilt Structure)",
+        "elevation_m": 94.0,
+        "total_capacity": 2800,
+        "current_occupancy": 450,
+        "power_backup": "60kVA Generator + Solar Microgrid",
+        "drinking_water": "Water Treatment Plant (8,000 L Capacity)",
+        "medical_facilities": "Disaster Medical Triage (SDRF Medical Team)",
+        "food_stock_days": 8,
+        "is_wheelchair_accessible": true,
+        "status": "Operational - Green"
+      },
+      "geometry": { "type": "Point", "coordinates": [93.910, 26.998] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SHELTER-06",
+        "name": "Sagalee Government Higher Secondary School",
+        "type": "Upland Administrative Shelter",
+        "elevation_m": 645.0,
+        "total_capacity": 1100,
+        "current_occupancy": 50,
+        "power_backup": "25kVA Generator",
+        "drinking_water": "Mountain Spring Gravity Filtered Tank",
+        "medical_facilities": "Sagalee CHC (Community Health Centre) Annex",
+        "food_stock_days": 12,
+        "is_wheelchair_accessible": false,
+        "status": "Operational - Green"
+      },
+      "geometry": { "type": "Point", "coordinates": [93.665, 27.248] }
+    }
+  ]
+}

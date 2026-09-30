@@ -1,0 +1,295 @@
+{
+  "type": "FeatureCollection",
+  "name": "Dikrong_Road_Network",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ROAD-NH-415-01",
+        "name": "NH-415 (Doimukh to Nirjuli Main Arterial)",
+        "road_type": "National Highway",
+        "lanes": 4,
+        "capacity_vph": 3200,
+        "base_speed_kmph": 60,
+        "elevation_m": 140.0,
+        "is_currently_closed": false,
+        "closure_reason": null,
+        "from_node": "VIL-01",
+        "to_node": "VIL-02"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.748, 27.145],
+          [93.745, 27.138],
+          [93.742, 27.132]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ROAD-NH-415-02",
+        "name": "NH-415 (Nirjuli to Karsingsa Ridge)",
+        "road_type": "National Highway",
+        "lanes": 2,
+        "capacity_vph": 1800,
+        "base_speed_kmph": 50,
+        "elevation_m": 150.0,
+        "is_currently_closed": false,
+        "closure_reason": null,
+        "from_node": "VIL-02",
+        "to_node": "VIL-03"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.742, 27.132],
+          [93.765, 27.126],
+          [93.785, 27.122]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ROAD-NH-415-03",
+        "name": "NH-415 (Karsingsa to Banderdewa Checkpost)",
+        "road_type": "National Highway",
+        "lanes": 2,
+        "capacity_vph": 1800,
+        "base_speed_kmph": 55,
+        "elevation_m": 124.0,
+        "is_currently_closed": false,
+        "closure_reason": null,
+        "from_node": "VIL-03",
+        "to_node": "VIL-04"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.785, 27.122],
+          [93.805, 27.115],
+          [93.825, 27.110]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ROAD-NH-15-01",
+        "name": "NH-15 (Banderdewa to Harmuti Junction)",
+        "road_type": "National Highway",
+        "lanes": 2,
+        "capacity_vph": 2200,
+        "base_speed_kmph": 65,
+        "elevation_m": 105.0,
+        "is_currently_closed": false,
+        "closure_reason": null,
+        "from_node": "VIL-04",
+        "to_node": "VIL-05"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.825, 27.110],
+          [93.855, 27.095],
+          [93.885, 27.082]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ROAD-SH-01",
+        "name": "Harmuti-Pichola Embankment Road",
+        "road_type": "State Highway / PWD Road",
+        "lanes": 1,
+        "capacity_vph": 800,
+        "base_speed_kmph": 35,
+        "elevation_m": 88.5,
+        "is_currently_closed": false,
+        "closure_reason": null,
+        "from_node": "VIL-05",
+        "to_node": "VIL-06"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.885, 27.082],
+          [93.892, 27.068],
+          [93.902, 27.051]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ROAD-RURAL-01",
+        "name": "Pichola to Bihpuria Rural Link",
+        "road_type": "Major District Road",
+        "lanes": 2,
+        "capacity_vph": 1200,
+        "base_speed_kmph": 40,
+        "elevation_m": 82.0,
+        "is_currently_closed": false,
+        "closure_reason": null,
+        "from_node": "VIL-06",
+        "to_node": "VIL-08"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.902, 27.051],
+          [93.910, 27.020],
+          [93.918, 26.985]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ROAD-RURAL-02",
+        "name": "Merbil to Bihpuria High Ground Connector",
+        "road_type": "Rural Road",
+        "lanes": 1,
+        "capacity_vph": 600,
+        "base_speed_kmph": 30,
+        "elevation_m": 83.0,
+        "is_currently_closed": false,
+        "closure_reason": null,
+        "from_node": "VIL-07",
+        "to_node": "VIL-08"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.935, 27.021],
+          [93.925, 27.005],
+          [93.918, 26.985]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ROAD-EVAC-01",
+        "name": "Doimukh Township to Shelter-01 (Ridge Access Road)",
+        "road_type": "Dedicated Evacuation Arterial",
+        "lanes": 2,
+        "capacity_vph": 1500,
+        "base_speed_kmph": 40,
+        "elevation_m": 155.0,
+        "is_currently_closed": false,
+        "closure_reason": null,
+        "from_node": "VIL-01",
+        "to_node": "SHELTER-01"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.748, 27.145],
+          [93.751, 27.150],
+          [93.755, 27.155]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ROAD-EVAC-02",
+        "name": "Nirjuli Riverside to NERIST Shelter-02 (High Ground)",
+        "road_type": "Dedicated Evacuation Arterial",
+        "lanes": 2,
+        "capacity_vph": 2000,
+        "base_speed_kmph": 40,
+        "elevation_m": 148.0,
+        "is_currently_closed": false,
+        "closure_reason": null,
+        "from_node": "VIL-02",
+        "to_node": "SHELTER-02"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.742, 27.132],
+          [93.740, 27.135],
+          [93.738, 27.138]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ROAD-EVAC-03",
+        "name": "Harmuti Bazar to Railway High School Shelter-04",
+        "road_type": "Dedicated Evacuation Arterial",
+        "lanes": 2,
+        "capacity_vph": 1600,
+        "base_speed_kmph": 40,
+        "elevation_m": 108.0,
+        "is_currently_closed": false,
+        "closure_reason": null,
+        "from_node": "VIL-05",
+        "to_node": "SHELTER-04"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.885, 27.082],
+          [93.880, 27.089],
+          [93.875, 27.095]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ROAD-EVAC-04",
+        "name": "Bihpuria Rural to Bihpuria College Shelter-05",
+        "road_type": "Dedicated Evacuation Arterial",
+        "lanes": 2,
+        "capacity_vph": 2200,
+        "base_speed_kmph": 45,
+        "elevation_m": 90.0,
+        "is_currently_closed": false,
+        "closure_reason": null,
+        "from_node": "VIL-08",
+        "to_node": "SHELTER-05"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.918, 26.985],
+          [93.914, 26.992],
+          [93.910, 26.998]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ROAD-UPSTREAM-01",
+        "name": "Sagalee to Doimukh Hill Highway",
+        "road_type": "State Highway (Mountain)",
+        "lanes": 2,
+        "capacity_vph": 900,
+        "base_speed_kmph": 35,
+        "elevation_m": 350.0,
+        "is_currently_closed": false,
+        "closure_reason": null,
+        "from_node": "VIL-10",
+        "to_node": "VIL-01"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [93.660, 27.240],
+          [93.700, 27.200],
+          [93.748, 27.145]
+        ]
+      }
+    }
+  ]
+}
