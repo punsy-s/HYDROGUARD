@@ -1,289 +1,894 @@
-# TerraGuard NE: Intelligent Flash Flood Prediction, Downstream Impact Simulation and Smart Evacuation System
+# 🌊 HydroGuard
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![FastAPI](https://img.shields.io/badge/Backend-FastAPI%200.110-009688.svg)](https://fastapi.tiangolo.com)
-[![React](https://img.shields.io/badge/Frontend-React%2019%20%2B%20Vite%208-61DAFB.svg)](https://react.dev)
-[![Leaflet](https://img.shields.io/badge/GIS-Leaflet%202D-199900.svg)](https://leafletjs.com)
-[![HEC-RAS](https://img.shields.io/badge/Hydraulics-HEC--RAS%202D%20Adapter-0284C7.svg)](https://www.hec.usace.army.mil/software/hec-ras/)
-[![ESP32](https://img.shields.io/badge/IoT-ESP32%20Telemetry-E7352C.svg)](https://espressif.com)
+### Intelligent Flash Flood Prediction • Downstream Impact Simulation • Smart Evacuation
 
----
+> **HydroGuard** is an end-to-end disaster intelligence platform
+> designed for hyper-local flash-flood risk monitoring in hilly and
+> mountainous regions of India.
 
-## 1. Executive Summary & Problem Statement
+The system combines **IoT telemetry, weather data, hydrological
+modelling, GIS, 2D flood simulation, population exposure analysis,
+traffic-aware evacuation routing, and emergency alerts** into a single
+operational platform.
 
-Flash floods in the steep, fragile terrain of the Eastern Himalayas and hilly regions of India (such as Arunachal Pradesh, Assam foothills, Uttarakhand, and Himachal Pradesh) pose severe threats to life and infrastructure. Characterized by brief times of concentration ($T_c < 2\text{--}4\text{ hours}$), rapid soil saturation, and narrow mountain gorges, torrential surges can inundate downstream riverine communities with virtually zero warning time.
+------------------------------------------------------------------------
 
-**TerraGuard NE** is an end-to-end, full-stack disaster intelligence and tactical decision-support system. Built specifically for the **Dikrong River Catchment** (Papum Pare, Arunachal Pradesh to Lakhimpur, Assam), it connects edge IoT sensors to physics-guided machine learning risk prediction, 2D hydrodynamic simulation, demographic exposure assessment, and traffic-aware safe evacuation routing.
+## 🚨 The Problem
 
-### Core Operational Cycle:
+Flash floods in hilly regions can develop extremely quickly. Rainfall
+alone does not describe the complete hazard. Risk also depends on soil
+saturation, river stage, terrain, downstream exposure, road
+accessibility, bridges, shelters, and evacuation traffic.
+
+HydroGuard connects these factors:
+
+``` text
+OBSERVE → MONITOR → PREDICT → SIMULATE → ASSESS IMPACT
+                                      ↓
+                         PLAN EVACUATION → ALERT
+                                      ↓
+                              VERIFY → LEARN
 ```
-Predict → Monitor → Simulate → Assess Impact → Evacuate → Verify → Learn
+
+## 🎯 Project Objective
+
+> **Move from simply asking "How much rain will fall?" to asking "Can
+> the terrain and drainage system safely handle the incoming water?"**
+
+HydroGuard provides:
+
+-   Hyper-local flood-risk assessment
+-   Early warning lead-time estimation
+-   Real-time environmental monitoring
+-   Flood inundation modelling
+-   Downstream impact assessment
+-   Population exposure estimation
+-   Safe evacuation route planning
+-   Traffic-aware routing
+-   Emergency notification workflows
+-   GIS-based situational awareness
+
+------------------------------------------------------------------------
+
+## 🗺️ Current Demonstration Area
+
+**Dikrong River Catchment**\
+Papum Pare, Arunachal Pradesh → Lakhimpur, Assam\
+Eastern Himalayan foothills
+
+The current implementation contains GIS datasets for the catchment
+boundary, river network, villages, infrastructure, roads, shelters, and
+demonstration scenarios.
+
+> The architecture is designed to expand to other vulnerable hilly
+> catchments.
+
+------------------------------------------------------------------------
+
+## 🖼️ Dashboard Preview
+
+Add your dashboard screenshot/GIF here:
+
+``` markdown
+![HydroGuard Dashboard](docs/images/dashboard.png)
 ```
 
----
+------------------------------------------------------------------------
 
-## 2. Truth & Provenance Classification Standard
+## 🏷️ Project Badges
 
-To ensure disaster management officers, incident commanders, and citizens are never misled by unverified model outputs, every piece of data rendered in the system carries an immutable provenance classification tag:
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?logo=fastapi)
+![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python)
+![Leaflet](https://img.shields.io/badge/Maps-Leaflet-199900?logo=leaflet)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss)
+![Tests](https://img.shields.io/badge/tests-10%20passed-success)
 
-| Tag | Category | Description & Source |
-| :--- | :--- | :--- |
-| **`[OBSERVED]`** | Ground-Truth Telemetry | Physical measurements from ESP32 telemetry stations and CWC/IMD gauges. |
-| **`[FORECAST]`** | Numerical Weather Prediction | Real-time atmospheric forecasts via Open-Meteo API (ECMWF/GFS). |
-| **`[PREDICTED]`** | AI / Hydrological Model | Flash flood risk scores and lead-times calculated by the machine learning engine. |
-| **`[SIMULATED]`** | Hydraulic 2D Solver | Inundation depths, velocities, and arrival times from HEC-RAS 2D hydrodynamic solver. |
-| **`[OFFICIAL WARNING]`**| Signed Evacuation Order | Authorized, digitally approved emergency orders issued by SDMA / DDMA officers. |
+------------------------------------------------------------------------
 
----
+# 🧠 System Architecture
 
-## 3. System Architecture & Flowchart
-
-```mermaid
+``` mermaid
 flowchart TD
-    subgraph Edge_IoT["1. Edge & IoT Layer"]
-        ESP1["ESP32 Rain Gauge (GPIO 13 Debounced)"]
-        ESP2["ESP32 Ultrasonic River Stage (JSN-SR04T)"]
-        ESP3["ESP32 Capacitive Soil Moisture (ADC1)"]
-        WIFI["Wi-Fi / LoRaWAN Mesh Gateway"]
-    end
+    A[ESP32 IoT Sensor Nodes]
+    B[Weather Data]
+    C[GIS / Terrain Data]
 
-    subgraph Data_Services["2. Data & External Providers"]
-        OM["Open-Meteo NWP Weather API"]
-        OSM["OpenStreetMap Road Network"]
-        SMS["SMS / Web Push Gateway"]
-    end
+    A --> D[Data Ingestion Layer]
+    B --> D
+    C --> D
+    D --> E[(Spatial Database)]
 
-    subgraph Backend_Platform["3. FastAPI Core Backend"]
-        INGEST["IoT & Weather Ingestion Engine"]
-        PREDICT["Hybrid Physical-ML Risk Classifier"]
-        HECRAS["HEC-RAS 2D Adapter / Hydrodynamic Solver"]
-        DAMAGE["Shapely GIS Damage & Exposure Engine"]
-        EVAC["Traffic-Aware Constrained Routing Engine"]
-        AUTH["Role-Based Access (Public / Official / Admin)"]
-        DB[(PostgreSQL + PostGIS / SQLite Spatial)]
-    end
+    E --> F[Flash Flood Risk Engine]
+    F --> G[HEC-RAS / Hydraulic Simulation]
+    G --> H[Downstream Damage Assessment]
+    H --> I[Evacuation Route Optimizer]
+    I --> J[Emergency Alerts]
 
-    subgraph Frontend_Console["4. React 19 + Leaflet GIS Dashboard"]
-        NAV["Command Navbar & Scenario Switcher"]
-        MAP["Leaflet 2D GIS Inundation & Route Engine"]
-        HYDRO["Real-Time Gauge Hydrograph Charts"]
-        EVAC_UI["Turn-by-Turn Safe Evacuation Planner"]
-        ALERTS["Incident Commander Approval Workflow"]
-    end
-
-    ESP1 & ESP2 & ESP3 --> WIFI
-    WIFI --> INGEST
-    OM --> INGEST
-    INGEST --> DB
-
-    DB --> PREDICT
-    PREDICT --> HECRAS
-    HECRAS --> DAMAGE
-    DAMAGE --> EVAC
-    OSM --> EVAC
-    EVAC --> SMS
-
-    DB <--> Frontend_Console
-    EVAC <--> EVAC_UI
-    DAMAGE <--> MAP
+    E --> K[React GIS Dashboard]
+    F --> K
+    G --> K
+    H --> K
+    I --> K
+    J --> K
 ```
 
----
+------------------------------------------------------------------------
 
-## 4. Database Entity-Relationship Diagram
+# 🏗️ Technology Stack
 
-```mermaid
-erDiagram
-    CATCHMENTS ||--o{ VILLAGES : contains
-    CATCHMENTS ||--o{ SENSORS : monitors
-    CATCHMENTS ||--o{ SHELTERS : accommodates
-    CATCHMENTS ||--o{ ROADS : networks
-    CATCHMENTS ||--o{ INFRASTRUCTURE : protects
-    CATCHMENTS ||--o{ PREDICTIONS : forecasts
-    CATCHMENTS ||--o{ ALERTS : broadcasts
+### Frontend
 
-    SENSORS ||--o{ SENSOR_READINGS : records
-    VILLAGES ||--o| SHELTERS : assigned_to
+-   React 19
+-   TypeScript
+-   Vite
+-   Tailwind CSS
+-   Leaflet
+-   Recharts
+-   Lucide React
 
-    USERS {
-        string id PK
-        string username
-        string role
-        string hashed_password
-    }
+### Backend
 
-    CATCHMENTS {
-        string id PK
-        string name
-        float area_sq_km
-        float mean_slope_degrees
-        float time_of_concentration_hours
-    }
+-   Python
+-   FastAPI
+-   SQLAlchemy
+-   Pydantic
+-   SQLite / PostgreSQL
+-   PostGIS
+-   Redis
 
-    VILLAGES {
-        string id PK
-        string name
-        int total_population
-        int vulnerable_elderly
-        int vulnerable_children
-        float elevation_m
-    }
+### GIS & Hydrology
 
-    SENSORS {
-        string id PK
-        string device_id
-        string sensor_type
-        float latitude
-        float longitude
-        string status
-    }
+-   Leaflet GIS
+-   GeoJSON
+-   Shapely
+-   HEC-RAS 2D
+-   OpenStreetMap
 
-    ROADS {
-        string id PK
-        string name
-        int lanes
-        int capacity_vph
-        float base_speed_kmph
-        boolean is_closed
-        float current_water_depth_m
-    }
+### Environmental Data
 
-    SHELTERS {
-        string id PK
-        string name
-        int total_capacity
-        int current_occupancy
-        float elevation_m
-        boolean is_accessible
-    }
+-   Open-Meteo
+-   IoT sensor telemetry
+-   River-stage measurements
+-   Soil-moisture measurements
+-   Rainfall measurements
+
+### Hardware
+
+-   ESP32
+-   Tipping-bucket rain gauge
+-   JSN-SR04T ultrasonic river-stage sensor
+-   Capacitive soil-moisture sensor
+-   Battery-voltage monitoring
+
+------------------------------------------------------------------------
+
+# ✅ What Has Already Been Built
+
+## 1. 🖥️ Command & Control Dashboard
+
+A React operational dashboard with 10 command pages:
+
+-   Landing / project overview
+-   Main disaster dashboard
+-   Live monitoring
+-   Flood prediction
+-   Flood simulation
+-   Downstream damage assessment
+-   Evacuation planning
+-   Emergency alerts
+-   Administration console
+-   Project/scientific information
+
+------------------------------------------------------------------------
+
+## 2. 🗺️ Interactive GIS Map
+
+Leaflet-based map layers include:
+
+-   Catchment boundary
+-   River network
+-   Villages
+-   Sensors
+-   Shelters
+-   Roads
+-   Flooded/inundated areas
+-   Evacuation routes
+
+------------------------------------------------------------------------
+
+## 3. 🌧️ IoT Environmental Monitoring
+
+ESP32 telemetry currently supports:
+
+  Sensor                      Purpose           Interface
+  --------------------------- ----------------- ------------------
+  Tipping Bucket Rain Gauge   Rainfall          GPIO 13
+  JSN-SR04T                   River Stage       GPIO 5 / GPIO 18
+  Capacitive Soil Moisture    Soil Saturation   GPIO 34
+  Battery Monitor             Node Power        GPIO 35
+
+Firmware includes:
+
+-   Interrupt-based rainfall measurement
+-   Debouncing
+-   Median filtering
+-   Hardware watchdog
+-   Offline data buffering
+-   SPIFFS circular storage
+-   Calibration parameters
+
+The offline buffer supports up to 500 readings.
+
+------------------------------------------------------------------------
+
+## 4. 🌦️ Weather Integration
+
+The backend integrates Open-Meteo weather information.
+
+HydroGuard explicitly labels information as:
+
+``` text
+[OBSERVED]
+[FORECAST]
+[PREDICTED]
+[SIMULATED]
+[OFFICIAL WARNING]
 ```
 
----
+This separates physical measurements, forecasts, model outputs,
+simulations, and authorized warnings.
 
-## 5. Mathematical & Engineering Foundations
+------------------------------------------------------------------------
 
-### A. Manning's Open Channel Flow (River Stage & Velocity)
-The cross-sectional stage-discharge relationship is computed along the Dikrong reach:
-$$Q = \frac{1}{n} A R^{2/3} S_0^{1/2}$$
-For wide rectangular mountain channels:
-$$y = \left( \frac{Q \cdot n}{W \cdot S_0^{1/2}} \right)^{3/5}$$
-- Manning's $n$: `0.038` (stony Himalayan gravel/cobble bed)
-- Reach slope $S_0$: `0.012 - 0.024`
-- Channel width $W$: `120m` (Doimukh) to `240m` (Harmuti-Bihpuria floodplain)
+# 🧮 5. Flash Flood Prediction Engine
 
-### B. Greenshields Macroscopic Traffic Density Model
-Evacuation travel speeds dynamically scale with evacuee vehicular volume:
-$$v = v_f \left( 1 - \frac{k}{k_j} \right)$$
-Where $v_f$ is free-flow highway speed, $k$ is active evacuation density, and $k_j$ is jam density.
+The hybrid physical/ML risk engine considers:
 
-### C. Life-Safety Roadway Pruning Threshold
-According to Indian Road Congress (IRC) and FEMA flood hazard guidelines:
-- Water depth $> 0.30\text{ m}$ (12 inches) causes loss of vehicle steering traction and buoyant sweep.
-- Any road segment with simulated depth $> 0.30\text{ m}$ or compromised bridges is **strictly pruned** from the evacuation routing graph.
+-   Rainfall intensity
+-   Rainfall accumulation
+-   Soil saturation
+-   River stage
+-   Rate of river rise
+-   Catchment characteristics
+-   Hydrological thresholds
 
----
+Outputs include:
 
-## 6. Demonstration Scenarios
+-   Continuous risk score
+-   Risk category
+-   Estimated warning lead time
+-   Feature/explanation breakdown
 
-TerraGuard NE includes three preconfigured demonstration scenarios switchable live from the top navbar:
+------------------------------------------------------------------------
 
-| Scenario | Tag | Rainfall | River Stage | Peak Q | Downstream Impact & Evacuation Action |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Scenario 1** | `NORMAL_CONDITIONS` | 4.2 mm/h | 3.10 m | 280 m³/s | Baseflow. All roads open. Normal operations. |
-| **Scenario 2** | `RISING_FLOOD_RISK` | 38.5 mm/h | 6.90 m | 1,450 m³/s | Saturated soil (76.5%). Orange Watch advisory. Nirjuli low bank on standby. |
-| **Scenario 3** | `FLASH_FLOOD_EMERGENCY` | 96.4 mm/h | 10.80 m | 3,480 m³/s | Cloudburst surge. Pichola right embankment breaches. Timber bridge cutoff. Level-3 Red Evacuation Order. |
+# 🌊 6. Hydrological Modelling
 
----
+The project incorporates Manning's open-channel flow equation:
 
-## 7. Quickstart Installation Guide
+``` text
+Q = (1/n) A R^(2/3) S₀^(1/2)
+```
 
-### Option A: Local Zero-Setup Execution (Recommended for Demo & Hackathons)
+Current modelling parameters include channel roughness, slope, width,
+river stage, and flow velocity.
 
-TerraGuard NE is preconfigured to run locally with **zero external database dependencies** using SQLite with full spatial modeling:
+------------------------------------------------------------------------
 
-#### 1. Backend Setup:
-```bash
-# Navigate to backend directory
-cd backend
+# 🌊 7. HEC-RAS 2D Flood Simulation
 
-# Install dependencies
-python -m pip install -r requirements.txt
+The hydraulic layer is designed to model:
 
-# Run automated tests
+-   Flood depth
+-   Flood extent
+-   Flow behaviour
+-   Downstream propagation
+-   Inundation areas
+-   Flood arrival behaviour
+
+HydroGuard includes a HEC-RAS adapter plus a hydrodynamic diffusion-wave
+fallback when native HEC-RAS execution is unavailable.
+
+------------------------------------------------------------------------
+
+# 🏘️ 8. Downstream Damage & Exposure
+
+The GIS damage engine identifies potentially affected:
+
+-   Villages
+-   Roads
+-   Infrastructure
+-   Population
+-   Other mapped assets
+
+Pipeline:
+
+``` text
+Flood Simulation
+      ↓
+Inundation Polygon
+      ↓
+Spatial Intersection
+      ↓
+Affected Assets
+      ↓
+Population Exposure
+      ↓
+Road Cutoffs
+```
+
+Shapely is used for spatial analysis.
+
+------------------------------------------------------------------------
+
+# 🚗 9. Smart Evacuation Routing
+
+The routing engine considers:
+
+-   Flood depth
+-   Road accessibility
+-   Bridge condition
+-   Road connectivity
+-   Traffic congestion
+-   Shelter capacity
+-   Travel time
+
+Unsafe road segments are removed from the routing graph.
+
+The current implementation uses a Dijkstra-based road graph and
+Greenshields traffic-density model:
+
+``` text
+v(k) = v_f (1 - k/k_j)
+```
+
+------------------------------------------------------------------------
+
+# 🚨 10. Emergency Alert System
+
+Current functionality includes:
+
+-   SMS simulation
+-   Web push simulation
+-   Official alert approval
+-   Incident Commander workflow
+-   Citizen reports
+-   Emergency order tracking
+
+Automated predictions are separated from officially authorized emergency
+warnings.
+
+------------------------------------------------------------------------
+
+# 🏛️ 11. Role-Based Administration
+
+Administrative functionality includes:
+
+-   System health
+-   Sensor fleet health
+-   Adapter status
+-   Database metrics
+-   Hardware diagnostics
+-   Audit information
+
+The backend includes password hashing, JWT authentication, and RBAC.
+
+------------------------------------------------------------------------
+
+# 🎛️ 12. Demonstration Scenarios
+
+  -------------------------------------------------------------------------------------
+  Scenario    Tag                              Rainfall     River Stage          Peak Q
+  ----------- ------------------------- --------------- --------------- ---------------
+  🟢 Normal   `NORMAL_CONDITIONS`              4.2 mm/h          3.10 m        280 m³/s
+
+  🟠 Rising   `RISING_FLOOD_RISK`             38.5 mm/h          6.90 m      1,450 m³/s
+  Risk                                                                  
+
+  🔴          `FLASH_FLOOD_EMERGENCY`         96.4 mm/h         10.80 m      3,480 m³/s
+  Emergency                                                             
+  -------------------------------------------------------------------------------------
+
+These scenarios demonstrate the transition from normal conditions to a
+critical flood emergency.
+
+------------------------------------------------------------------------
+
+# 🧪 13. Automated Testing
+
+The documented backend test suite currently reports:
+
+``` text
+10 tests
+10 passed
+0 failed
+```
+
+It covers:
+
+-   Health
+-   Catchments
+-   Sensor telemetry and health
+-   Weather integration
+-   Flood prediction
+-   Simulation and scenario switching
+-   Damage assessment
+-   Evacuation routing
+-   Shelters and alerts
+-   Administration
+
+Run:
+
+``` bash
 python -m pytest tests/ -v
+```
 
-# Start FastAPI Server (Runs on http://localhost:8000)
+------------------------------------------------------------------------
+
+# 🐳 14. Docker Deployment
+
+Included:
+
+-   Backend Dockerfile
+-   Frontend Dockerfile
+-   Docker Compose
+-   PostgreSQL/PostGIS configuration
+-   Redis configuration
+-   Production frontend build
+-   Nginx reverse proxy
+
+------------------------------------------------------------------------
+
+# 📁 Project Structure
+
+``` text
+hydroguard/
+│
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   ├── core/
+│   │   ├── models/
+│   │   ├── schemas/
+│   │   ├── services/
+│   │   └── data/
+│   ├── tests/
+│   ├── main.py
+│   ├── requirements.txt
+│   └── Dockerfile
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── types/
+│   ├── package.json
+│   └── Dockerfile
+│
+├── iot_firmware/
+│   ├── esp32_hydroguard_node/
+│   │   ├── esp32_hydroguard_node.ino
+│   │   └── config.h
+│   └── WIRING_AND_SETUP.md
+│
+├── docs/
+│   └── images/
+│
+├── docker-compose.yml
+└── README.md
+```
+
+------------------------------------------------------------------------
+
+# 🔬 Scientific & Engineering Approach
+
+``` text
+                 ENVIRONMENT
+                     │
+        ┌────────────┼────────────┐
+        ↓            ↓            ↓
+     Rainfall    Soil Moisture   River Stage
+        │            │            │
+        └────────────┼────────────┘
+                     ↓
+              RISK ASSESSMENT
+                     ↓
+             HYDRAULIC MODEL
+                     ↓
+            FLOOD INUNDATION
+                     ↓
+             DAMAGE ANALYSIS
+                     ↓
+          POPULATION EXPOSURE
+                     ↓
+          SAFE ROUTE OPTIMIZER
+                     ↓
+              ALERT SYSTEM
+                     ↓
+               EVACUATION
+```
+
+------------------------------------------------------------------------
+
+# 🚧 Roadmap
+
+## Phase 1 --- Real Field Deployment
+
+-   [ ] Deploy ESP32 sensor nodes in real catchments
+-   [ ] Connect real tipping-bucket rain gauges
+-   [ ] Deploy river-stage stations
+-   [ ] Deploy soil-moisture stations
+-   [ ] Reliable long-range communication
+-   [ ] LoRa / LoRaWAN mesh
+-   [ ] GSM emergency communication
+-   [ ] Solar/battery-powered field operation
+
+## Phase 2 --- Multi-Catchment Expansion
+
+``` text
+Dikrong
+   ↓
+Arunachal Pradesh
+   ↓
+Northeast India
+   ↓
+Hilly & Mountainous Regions of India
+```
+
+-   [ ] Multi-catchment configuration
+-   [ ] Automatic catchment selection
+-   [ ] Regional hazard dashboard
+-   [ ] Catchment-specific model calibration
+
+## Phase 3 --- Advanced Flood Prediction
+
+-   [ ] Train ML models using historical flood events
+-   [ ] Larger historical rainfall datasets
+-   [ ] Historical flood inventories
+-   [ ] More soil-moisture observations
+-   [ ] Catchment-specific calibration
+-   [ ] Prediction uncertainty estimates
+-   [ ] Improved warning lead-time prediction
+-   [ ] Historical-event validation
+
+## Phase 4 --- Advanced Hydrodynamic Simulation
+
+-   [ ] Production HEC-RAS workflows
+-   [ ] Automated model generation/configuration
+-   [ ] Higher-resolution terrain
+-   [ ] DEM-derived elevation
+-   [ ] Improved river cross-sections
+-   [ ] Multiple breach scenarios
+-   [ ] Flood arrival-time maps
+-   [ ] Depth and velocity maps
+
+## Phase 5 --- Satellite & Remote Sensing
+
+-   [ ] Satellite imagery
+-   [ ] DEM/elevation
+-   [ ] Land-cover data
+-   [ ] Terrain slope
+-   [ ] Drainage networks
+-   [ ] Historical landslide/flood inventories
+-   [ ] Land-use change analysis
+
+## Phase 6 --- Smarter Evacuation
+
+-   [ ] Real-time traffic data
+-   [ ] Dynamic road closures
+-   [ ] Detailed bridge vulnerability
+-   [ ] Shelter capacity optimization
+-   [ ] Multi-shelter allocation
+-   [ ] Crowd-aware evacuation
+-   [ ] Emergency vehicle prioritization
+-   [ ] Offline evacuation maps
+-   [ ] Mobile citizen navigation
+
+## Phase 7 --- Community & Citizen Reporting
+
+-   [ ] Flood-depth reports
+-   [ ] Road-blockage reports
+-   [ ] Bridge-damage reports
+-   [ ] Infrastructure-damage reports
+-   [ ] Unsafe-location reports
+-   [ ] Field photographs
+-   [ ] Emergency reports
+-   [ ] Ground-truth verification layer
+
+------------------------------------------------------------------------
+
+# 🔄 Long-Term Vision
+
+HydroGuard follows a closed-loop disaster intelligence architecture:
+
+``` text
+       ┌───────────────┐
+       │    PREDICT    │
+       └───────┬───────┘
+               ↓
+       ┌───────────────┐
+       │    MONITOR    │
+       └───────┬───────┘
+               ↓
+       ┌───────────────┐
+       │    VERIFY     │
+       └───────┬───────┘
+               ↓
+       ┌───────────────┐
+       │     LEARN     │
+       └───────┬───────┘
+               │
+               └──────────────→ PREDICT
+```
+
+The long-term goal is a system that continuously:
+
+**observes → predicts → simulates → verifies → learns → responds.**
+
+------------------------------------------------------------------------
+
+# ⚠️ Disclaimer
+
+HydroGuard is an engineering and research prototype.
+
+Predictions, simulations, estimated exposure values, and evacuation
+routes should not be treated as official emergency instructions unless
+validated and authorized by the appropriate disaster-management
+authorities.
+
+The system explicitly distinguishes observed, forecast, predicted,
+simulated, and officially authorized information.
+
+------------------------------------------------------------------------
+
+# 🚀 Running Locally
+
+## Prerequisites
+
+-   Python 3.13
+-   Node.js / npm
+-   Git
+-   Optional: Docker Desktop
+
+## Backend
+
+``` bash
+cd backend
+python -m venv .venv
+```
+
+### Windows
+
+``` powershell
+.venv\Scripts\activate
+```
+
+### macOS / Linux
+
+``` bash
+source .venv/bin/activate
+```
+
+Install dependencies:
+
+``` bash
+pip install -r requirements.txt
+```
+
+Start:
+
+``` bash
 python main.py
 ```
 
-#### 2. Frontend Setup:
-```bash
-# In a separate terminal, navigate to frontend directory
+Backend:
+
+``` text
+http://localhost:8000
+```
+
+Swagger:
+
+``` text
+http://localhost:8000/docs
+```
+
+## Frontend
+
+Open another terminal:
+
+``` bash
 cd frontend
-
-# Install npm dependencies
 npm install
-
-# Start Vite Development Server (Runs on http://localhost:3000)
 npm run dev
 ```
 
-Visit **`http://localhost:3000`** in your browser to interact with the full disaster management dashboard!
+Frontend:
 
----
+``` text
+http://localhost:3000
+```
 
-### Option B: Production Deployment via Docker Compose
+------------------------------------------------------------------------
 
-```bash
-# From the root directory
+# 🐳 Docker
+
+From the project root:
+
+``` bash
 docker compose up --build
 ```
-Services spun up:
-- **`web`**: Nginx + React 19 Frontend (`http://localhost:80`)
-- **`api`**: FastAPI Python Backend (`http://localhost:8000`)
-- **`db`**: PostgreSQL 15 with PostGIS 3.3 (`localhost:5432`)
-- **`redis`**: Redis Cache & Async Message Broker (`localhost:6379`)
 
----
+Stop:
 
-## 8. REST API Endpoints Reference
+``` bash
+docker compose down
+```
 
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `GET` | `/api/health` | System health check and catchment metadata |
-| `GET` | `/api/catchments` | List river catchments |
-| `GET` | `/api/catchments/{id}/boundary` | Catchment boundary GeoJSON |
-| `GET` | `/api/catchments/{id}/river-network`| River channels and reach parameters GeoJSON |
-| `GET` | `/api/catchments/{id}/villages` | Census-calibrated villages and demographic vulnerability |
-| `GET` | `/api/sensors` | List IoT telemetry stations and live fleet health |
-| `POST` | `/api/sensors/readings` | Ingest telemetry reading from ESP32 edge station |
-| `GET` | `/api/weather/{catchment_id}` | Live weather and forecast from Open-Meteo API |
-| `GET` | `/api/predictions/{id}/latest` | Latest flash flood risk assessment and lead time |
-| `POST` | `/api/predictions/run` | Run AI flood risk prediction with custom sliders |
-| `GET` | `/api/simulations/scenarios` | List demonstration scenarios |
-| `POST` | `/api/simulations/switch-scenario`| Live switch active scenario |
-| `POST` | `/api/simulations/run` | Launch asynchronous 2D hydraulic simulation job |
-| `GET` | `/api/simulations/{id}` | Poll simulation job status and execution progress |
-| `GET` | `/api/impact/{catchment_id}` | Downstream damage assessment and exposure breakdown |
-| `POST` | `/api/evacuation/routes` | Safety-first, traffic-aware evacuation routes |
-| `GET` | `/api/shelters` | High-ground safe shelters with real-time capacity |
-| `GET` | `/api/alerts` | Active emergency warnings and broadcast history |
-| `PUT` | `/api/alerts/{id}/approve` | Incident Commander approval and broadcast order |
-| `POST` | `/api/reports` | Submit citizen ground-truth field report |
-| `GET` | `/api/admin/system-health` | Adapter diagnostics and hardware inspection |
+------------------------------------------------------------------------
 
----
+# 🌐 Core API Modules
 
-## 9. ESP32 Hardware Wiring & Pinouts
+``` text
+/auth
+/catchments
+/sensors
+/weather
+/predictions
+/simulations
+/damage
+/evacuation
+/shelters
+/alerts
+/reports
+/admin
+```
 
-See [`iot_firmware/WIRING_AND_SETUP.md`](file:///iot_firmware/WIRING_AND_SETUP.md) for detailed assembly schematics:
-- **Tipping Bucket Rain Gauge**: Reed switch connected to **GPIO 13** (Interrupt debounced).
-- **JSN-SR04T Waterproof Ultrasonic**: Trig on **GPIO 5**, Echo on **GPIO 18** (5-point median ripple filter).
-- **Capacitive Soil Moisture Sensor v1.2**: Analog output connected to **GPIO 34** (ADC1_CH6).
-- **Battery Voltage Divider**: Midpoint connected to **GPIO 35** (ADC1_CH7).
+------------------------------------------------------------------------
 
----
+# 📊 Feature Status
 
-## 10. Authors & Acknowledgments
+  Capability                          Status
+  ----------------------------------- ------------
+  React GIS Dashboard                 ✅ Built
+  FastAPI Backend                     ✅ Built
+  Interactive GIS                     ✅ Built
+  ESP32 Telemetry                     ✅ Built
+  Rainfall Monitoring                 ✅ Built
+  River Stage Monitoring              ✅ Built
+  Soil Moisture Monitoring            ✅ Built
+  Weather Integration                 ✅ Built
+  Flood Risk Engine                   ✅ Built
+  Hydraulic Simulation Adapter        ✅ Built
+  Downstream Damage Analysis          ✅ Built
+  Population Exposure                 ✅ Built
+  Safe Evacuation Routing             ✅ Built
+  Traffic-Aware Routing               ✅ Built
+  Emergency Alert Workflow            ✅ Built
+  Scenario Simulation                 ✅ Built
+  Admin Console                       ✅ Built
+  Automated Tests                     ✅ Built
+  Docker Deployment                   ✅ Built
+  Multi-Catchment Deployment          🚧 Planned
+  Large-Scale ML Training             🚧 Planned
+  Real-Time Traffic Integration       🚧 Planned
+  Large-Scale Satellite Integration   🚧 Planned
+  Full Field Deployment               🚧 Planned
+  Citizen Mobile Application          🚧 Planned
 
-Developed for regional disaster resilience in Northeast India and academic engineering hackathons. Built with open-source technologies by senior full-stack and environmental engineering specialists.
+------------------------------------------------------------------------
+
+# 🏆 Why HydroGuard?
+
+Many disaster-management systems focus on only one stage of the disaster
+chain.
+
+HydroGuard attempts to connect the entire chain:
+
+``` text
+SENSORS
+   ↓
+WEATHER
+   ↓
+RISK
+   ↓
+HYDROLOGY
+   ↓
+FLOOD SIMULATION
+   ↓
+DAMAGE
+   ↓
+POPULATION
+   ↓
+ROADS
+   ↓
+TRAFFIC
+   ↓
+EVACUATION
+   ↓
+ALERTS
+```
+
+This creates a unified operational picture instead of treating flood
+prediction, impact assessment, and evacuation as isolated systems.
+
+------------------------------------------------------------------------
+
+# 🔌 Core Services
+
+``` text
+IoT Telemetry
+     │
+     ├── Rainfall
+     ├── River Stage
+     ├── Soil Moisture
+     └── Battery
+          │
+          ↓
+     Data Ingestion
+          │
+          ↓
+      Risk Engine
+          │
+          ├───────────────┐
+          ↓               ↓
+    HEC-RAS 2D       Weather Data
+          │
+          ↓
+   Flood Inundation
+          │
+          ↓
+    Damage Engine
+          │
+          ↓
+ Population Exposure
+          │
+          ↓
+ Evacuation Engine
+          │
+          ↓
+ Emergency Alerts
+```
+
+------------------------------------------------------------------------
+
+# 🤝 Contributing
+
+Contributions, ideas, bug reports, and research collaboration are
+welcome.
+
+``` bash
+git clone <repository-url>
+cd hydroguard
+
+git checkout -b feature/your-feature
+
+git add .
+git commit -m "feat: add your feature"
+
+git push origin feature/your-feature
+```
+
+Then open a Pull Request.
+
+------------------------------------------------------------------------
+
+# 📄 License
+
+Add your preferred open-source license here.
+
+Example:
+
+``` text
+MIT License
+```
+
+------------------------------------------------------------------------
+
+# 💙 HydroGuard
+
+### Turning environmental data into actionable disaster intelligence.
+
+**Predict → Monitor → Verify → Learn**
