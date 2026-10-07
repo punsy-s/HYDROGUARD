@@ -121,7 +121,7 @@ export const MapView: React.FC<MapViewProps> = ({
         }),
         onEachFeature: (feat, layer) => {
           layer.bindPopup(`
-            <div style="font-family: sans-serif; font-size: 12px; color: #0f172a;">
+            <div style="font-family: sans-serif; font-size: 12px; color: #1758f0;">
               <strong>${feat.properties.name}</strong><br/>
               Length: ${feat.properties.length_km} km<br/>
               Manning's n: ${feat.properties.manning_n}<br/>
@@ -336,27 +336,27 @@ export const MapView: React.FC<MapViewProps> = ({
   };
 
   return (
-    <div className="relative w-full rounded-xl overflow-hidden border border-slate-800 shadow-lg bg-slate-900" style={{ height }}>
+    <div className="relative w-full rounded-xl overflow-hidden border border-[#806C79] shadow-lg bg-[#4A3F4B]   " style={{ height }}>
       {/* Map Container */}
       <div ref={mapContainerRef} className="w-full h-full" />
 
       {/* Layer Control Widget */}
-      <div className="absolute top-3 right-3 z-[1000] bg-slate-900/90 backdrop-blur border border-slate-700/80 rounded-lg p-2.5 shadow-xl text-xs space-y-1.5">
-        <div className="flex items-center space-x-1.5 font-bold text-slate-300 pb-1 border-b border-slate-800">
-          <Layers className="w-3.5 h-3.5 text-blue-400" />
+      <div className="absolute top-3 right-3 z-[1000] bg-[#4A3F4B]   /90 backdrop-blur border border-[#806C79]/80 rounded-lg p-2.5 shadow-xl text-xs space-y-1.5">
+        <div className="flex items-center space-x-1.5 font-bold text-slate-300 pb-1 border-b border-[#806C79]">
+          <Layers className="w-3.5 h-3.5 text-[#C1A0AC]" />
           <span>GIS Layers</span>
         </div>
         
         <div className="grid grid-cols-2 gap-x-3 gap-y-1 pt-1">
           <button 
             onClick={() => toggleLayer('boundary')}
-            className={`flex items-center space-x-1 px-1.5 py-0.5 rounded transition ${layersVisible.boundary ? 'text-blue-400 bg-blue-500/10' : 'text-slate-500'}`}
+            className={`flex items-center space-x-1 px-1.5 py-0.5 rounded transition ${layersVisible.boundary ? 'text-[#C1A0AC] bg-[#F0D9E4]/10' : 'text-slate-500'}`}
           >
             <span>Catchment</span>
           </button>
           <button 
             onClick={() => toggleLayer('river')}
-            className={`flex items-center space-x-1 px-1.5 py-0.5 rounded transition ${layersVisible.river ? 'text-cyan-400 bg-cyan-500/10' : 'text-slate-500'}`}
+            className={`flex items-center space-x-1 px-1.5 py-0.5 rounded transition ${layersVisible.river ? 'text-[#C1A0AC] bg-[#F0D9E4]/10' : 'text-slate-500'}`}
           >
             <span>River Reach</span>
           </button>
@@ -368,7 +368,7 @@ export const MapView: React.FC<MapViewProps> = ({
           </button>
           <button 
             onClick={() => toggleLayer('roads')}
-            className={`flex items-center space-x-1 px-1.5 py-0.5 rounded transition ${layersVisible.roads ? 'text-emerald-400 bg-emerald-500/10' : 'text-slate-500'}`}
+            className={`flex items-center space-x-1 px-1.5 py-0.5 rounded transition ${layersVisible.roads ? 'text-[#20C7A2] bg-[#20C7A2]/10' : 'text-slate-500'}`}
           >
             <span>Road Status</span>
           </button>
@@ -386,7 +386,7 @@ export const MapView: React.FC<MapViewProps> = ({
           </button>
           <button 
             onClick={() => toggleLayer('shelters')}
-            className={`flex items-center space-x-1 px-1.5 py-0.5 rounded transition ${layersVisible.shelters ? 'text-emerald-400 bg-emerald-500/10' : 'text-slate-500'}`}
+            className={`flex items-center space-x-1 px-1.5 py-0.5 rounded transition ${layersVisible.shelters ? 'text-[#20C7A2] bg-[#20C7A2]/10' : 'text-slate-500'}`}
           >
             <span>Safe Shelters</span>
           </button>
@@ -394,7 +394,7 @@ export const MapView: React.FC<MapViewProps> = ({
       </div>
 
       {/* Map Legend */}
-      <div className="absolute bottom-3 left-3 z-[1000] bg-slate-900/90 backdrop-blur border border-slate-700/80 rounded-lg p-2.5 text-[11px] shadow-xl text-slate-300 space-y-1">
+      <div className="absolute bottom-3 left-3 z-[1000] bg-[#4A3F4B]   /90 backdrop-blur border border-[#806C79]/80 rounded-lg p-2.5 text-[11px] shadow-xl text-slate-300 space-y-1">
         <div className="font-semibold text-slate-400 text-[10px] uppercase">Legend</div>
         <div className="flex items-center space-x-2">
           <span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block"></span>

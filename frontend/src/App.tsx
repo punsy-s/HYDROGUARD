@@ -115,7 +115,7 @@ export function App() {
   const riskCategory = prediction?.risk_category || activeScenario?.risk_category || 'Low';
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#16131F] text-slate-100 flex flex-col font-sans">
       {/* Top Navbar */}
       <Navbar
         scenarios={scenarios}

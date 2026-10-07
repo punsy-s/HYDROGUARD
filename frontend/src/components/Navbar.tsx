@@ -34,21 +34,25 @@ export const Navbar: React.FC<NavbarProps> = ({
       case 'moderate':
         return 'bg-amber-500/20 text-amber-400 border-amber-500/40';
       default:
-        return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40';
+        return 'bg-emerald-500/20 text-[#20C7A2] border-emerald-500/40';
     }
   };
 
   return (
-    <header className="h-16 bg-slate-900/95 border-b border-slate-800 px-4 md:px-6 flex items-center justify-between sticky top-0 z-50 backdrop-blur">
+    <header className="h-16 bg-[#4A3F4B]   /95 border-b border-[#806C79] px-4 md:px-6 flex items-center justify-between sticky top-0 z-50 backdrop-blur">
       {/* Brand & Catchment Tag */}
       <div className="flex items-center space-x-3">
-        <div className="w-10 h-10 rounded-lg bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 shadow-sm">
-          <ShieldAlert className="w-6 h-6" />
+        <div className="w-10 h-10 rounded-full overflow-hidden">
+          <img
+           src="icon.svg"
+          alt="HydroGuard"
+          className="w-10 h-10 object-contain"
+          />
         </div>
         <div>
           <div className="flex items-center space-x-2">
-            <span className="font-bold text-lg text-white tracking-wide">TerraGuard NE</span>
-            <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/30">
+            <span className="font-bold text-lg text-white tracking-wide">HydroGuard</span>
+            <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-[#F0D9E4]/10 text-[#C1A0AC] border border-[#806C79]/30">
               Dikrong Basin
             </span>
           </div>
@@ -60,8 +64,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Center Controls: Live Scenario Selector */}
       <div className="relative">
-        <div className="flex items-center space-x-2 bg-slate-800/80 border border-slate-700/80 rounded-lg px-3 py-1.5 shadow-inner">
-          <Radio className="w-4 h-4 text-emerald-400 animate-pulse" />
+        <div className="flex items-center space-x-2 bg-slate-800/80 border border-[#806C79]/80 rounded-lg px-3 py-1.5 shadow-inner">
+          <Radio className="w-4 h-4 text-[#20C7A2] animate-pulse" />
           <span className="text-xs text-slate-400 font-medium hidden md:inline">Mode:</span>
           <select 
             value={activeScenarioId}
@@ -69,7 +73,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="bg-transparent text-xs font-semibold text-white focus:outline-none cursor-pointer pr-2"
           >
             {scenarios.map(sc => (
-              <option key={sc.id} value={sc.id} className="bg-slate-900 text-white">
+              <option key={sc.id} value={sc.id} className="bg-[#4A3F4B]    text-white">
                 {sc.name} ({sc.risk_category})
               </option>
             ))}
@@ -86,16 +90,16 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* User Role Switcher */}
-        <div className="flex items-center space-x-1.5 bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-slate-300">
-          <UserCheck className="w-3.5 h-3.5 text-blue-400" />
+        <div className="flex items-center space-x-1.5 bg-slate-800 border border-[#806C79] rounded-lg px-2.5 py-1 text-xs text-slate-300">
+          <UserCheck className="w-3.5 h-3.5 text-[#C1A0AC]" />
           <select
             value={userRole}
             onChange={(e) => onRoleChange(e.target.value)}
             className="bg-transparent text-xs font-medium text-white focus:outline-none cursor-pointer"
           >
-            <option value="PUBLIC" className="bg-slate-900 text-white">Public User</option>
-            <option value="OFFICIAL" className="bg-slate-900 text-white">Disaster Official (SDMA)</option>
-            <option value="ADMIN" className="bg-slate-900 text-white">Administrator</option>
+            <option value="PUBLIC" className="bg-[#4A3F4B]    text-white">Public User</option>
+            <option value="OFFICIAL" className="bg-[#4A3F4B]    text-white">Disaster Official (SDMA)</option>
+            <option value="ADMIN" className="bg-[#4A3F4B]    text-white">Administrator</option>
           </select>
         </div>
       </div>

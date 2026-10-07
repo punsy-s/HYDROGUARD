@@ -19,7 +19,7 @@ export const AdminConsole: React.FC = () => {
       {/* Header */}
       <div>
         <h1 className="text-xl font-bold text-white tracking-wide flex items-center space-x-2">
-          <Shield className="w-5 h-5 text-blue-400" />
+          <Shield className="w-5 h-5 text-[#C1A0AC]" />
           <span>System Administration & Adapter Health Console</span>
         </h1>
         <p className="text-xs text-slate-400">
@@ -30,10 +30,10 @@ export const AdminConsole: React.FC = () => {
       {/* Health Overview Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Overall Status */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm flex items-center justify-between">
+        <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-4 shadow-sm flex items-center justify-between">
           <div>
             <span className="text-xs text-slate-400 uppercase font-semibold">Backend Operational Status</span>
-            <div className="text-xl font-bold text-emerald-400 mt-1 flex items-center space-x-2">
+            <div className="text-xl font-bold text-[#20C7A2] mt-1 flex items-center space-x-2">
               <CheckCircle className="w-5 h-5" />
               <span>{health?.status || 'HEALTHY'}</span>
             </div>
@@ -43,7 +43,7 @@ export const AdminConsole: React.FC = () => {
         </div>
 
         {/* Database Status */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm flex items-center justify-between">
+        <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-4 shadow-sm flex items-center justify-between">
           <div>
             <span className="text-xs text-slate-400 uppercase font-semibold">Spatial Database</span>
             <div className="text-xl font-bold text-white mt-1">
@@ -53,14 +53,14 @@ export const AdminConsole: React.FC = () => {
               {health ? health.database_metrics.registered_users : 3} Users • {health ? health.database_metrics.simulations_executed : 2} Hydraulic Runs
             </div>
           </div>
-          <Database className="w-8 h-8 text-blue-500/30" />
+          <Database className="w-8 h-8 text-white/30" />
         </div>
 
         {/* Telemetry Status */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm flex items-center justify-between">
+        <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-4 shadow-sm flex items-center justify-between">
           <div>
             <span className="text-xs text-slate-400 uppercase font-semibold">Telecom & Alerts Adapter</span>
-            <div className="text-xl font-bold text-cyan-400 mt-1">
+            <div className="text-xl font-bold text-[#C1A0AC] mt-1">
               {health?.adapters.telecom_gateway.status || 'OPERATIONAL'}
             </div>
             <div className="text-[10px] text-slate-500 mt-0.5">SMS Gateway & Web Push Simulation Active</div>
@@ -70,7 +70,7 @@ export const AdminConsole: React.FC = () => {
       </div>
 
       {/* Adapter Diagnostics Table */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4 shadow-sm">
+      <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-5 space-y-4 shadow-sm">
         <span className="text-xs font-bold text-white uppercase tracking-wide">
           External Service & Solver Adapter Status
         </span>
@@ -81,7 +81,7 @@ export const AdminConsole: React.FC = () => {
               <div className="font-semibold text-white">Hydraulic Flood Simulation Adapter</div>
               <div className="text-[11px] text-slate-400">{health?.adapters.hydraulic_engine.active_adapter}</div>
             </div>
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-[#20C7A2] border border-emerald-500/30">
               ACTIVE & CALIBRATED
             </span>
           </div>
@@ -91,7 +91,7 @@ export const AdminConsole: React.FC = () => {
               <div className="font-semibold text-white">Numerical Weather Prediction Feed</div>
               <div className="text-[11px] text-slate-400">{health?.adapters.weather_provider.name} (Live Lat: 27.15, Lon: 93.75)</div>
             </div>
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-[#20C7A2] border border-emerald-500/30">
               ONLINE
             </span>
           </div>
@@ -101,7 +101,7 @@ export const AdminConsole: React.FC = () => {
               <div className="font-semibold text-white">OpenStreetMap Geospatial Road Graph</div>
               <div className="text-[11px] text-slate-400">OSM Network Topology & Elevation Profile with Greenshields model</div>
             </div>
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-[#20C7A2] border border-emerald-500/30">
               LOADED
             </span>
           </div>
@@ -109,9 +109,9 @@ export const AdminConsole: React.FC = () => {
       </div>
 
       {/* Security & Audit Notice */}
-      <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4 text-xs text-slate-400 space-y-1">
+      <div className="bg-[#4A3F4B]   /60 border border-[#806C79] rounded-xl p-4 text-xs text-slate-400 space-y-1">
         <div className="font-semibold text-slate-300 flex items-center space-x-1.5">
-          <FileText className="w-4 h-4 text-blue-400" />
+          <FileText className="w-4 h-4 text-[#C1A0AC]" />
           <span>Audit Logging & Role-Based Access Control</span>
         </div>
         <p className="text-[11px] leading-relaxed">

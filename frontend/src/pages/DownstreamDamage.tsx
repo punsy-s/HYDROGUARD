@@ -22,10 +22,10 @@ export const DownstreamDamage: React.FC<DownstreamDamageProps> = ({ damageReport
 
       {/* High-level Impact Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+        <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-4 shadow-sm">
           <div className="flex items-center justify-between text-slate-400 text-xs">
             <span>Total Exposed Population</span>
-            <Users className="w-4 h-4 text-blue-400" />
+            <Users className="w-4 h-4 text-[#C1A0AC]" />
           </div>
           <div className="text-2xl font-bold text-white mt-1">
             {damageReport ? damageReport.total_exposed_population.toLocaleString() : '0'}
@@ -35,7 +35,7 @@ export const DownstreamDamage: React.FC<DownstreamDamageProps> = ({ damageReport
           </div>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+        <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-4 shadow-sm">
           <div className="flex items-center justify-between text-slate-400 text-xs">
             <span>High Vulnerability Groups</span>
             <HeartPulse className="w-4 h-4 text-red-400" />
@@ -48,7 +48,7 @@ export const DownstreamDamage: React.FC<DownstreamDamageProps> = ({ damageReport
           </div>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+        <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-4 shadow-sm">
           <div className="flex items-center justify-between text-slate-400 text-xs">
             <span>Submerged Roadways</span>
             <Car className="w-4 h-4 text-amber-400" />
@@ -61,7 +61,7 @@ export const DownstreamDamage: React.FC<DownstreamDamageProps> = ({ damageReport
           </div>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+        <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-4 shadow-sm">
           <div className="flex items-center justify-between text-slate-400 text-xs">
             <span>Compromised Bridges</span>
             <AlertOctagon className="w-4 h-4 text-red-400" />
@@ -76,7 +76,7 @@ export const DownstreamDamage: React.FC<DownstreamDamageProps> = ({ damageReport
       </div>
 
       {/* Affected Settlements Table */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4 shadow-sm">
+      <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-5 space-y-4 shadow-sm">
         <div className="flex items-center justify-between">
           <span className="text-xs font-bold text-white uppercase tracking-wide">
             Settlement Impact Matrix
@@ -88,7 +88,7 @@ export const DownstreamDamage: React.FC<DownstreamDamageProps> = ({ damageReport
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-950/60 text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-800">
+            <thead className="bg-[#16131F]/60 text-slate-400 uppercase text-[10px] tracking-wider border-b border-[#806C79]">
               <tr>
                 <th className="py-2.5 px-3">Village / Township</th>
                 <th className="py-2.5 px-3">District</th>
@@ -112,7 +112,7 @@ export const DownstreamDamage: React.FC<DownstreamDamageProps> = ({ damageReport
                           {v.flood_depth_m} m
                         </span>
                       </td>
-                      <td className="py-2.5 px-3 text-cyan-400 font-semibold">{v.estimated_arrival_hrs} hrs</td>
+                      <td className="py-2.5 px-3 text-[#C1A0AC] font-semibold">{v.estimated_arrival_hrs} hrs</td>
                       <td className="py-2.5 px-3">
                         <div>{v.exposed_population.toLocaleString()}</div>
                         <div className="text-[10px] text-slate-500">
@@ -145,7 +145,7 @@ export const DownstreamDamage: React.FC<DownstreamDamageProps> = ({ damageReport
       {/* Submerged Roads & Cutoff Bridges Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Inundated Roads */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3 shadow-sm">
+        <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-5 space-y-3 shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-white uppercase tracking-wide">
               Submerged Road Corridors
@@ -158,7 +158,7 @@ export const DownstreamDamage: React.FC<DownstreamDamageProps> = ({ damageReport
           <div className="space-y-2 text-xs">
             {damageReport?.inundated_roads && damageReport.inundated_roads.length > 0 ? (
               damageReport.inundated_roads.map((r) => (
-                <div key={r.road_id} className="bg-slate-950/60 p-3 rounded-lg border border-slate-800 space-y-1">
+                <div key={r.road_id} className="bg-[#16131F]/60 p-3 rounded-lg border border-[#806C79] space-y-1">
                   <div className="flex items-center justify-between">
                     <span className="font-semibold text-white">{r.name}</span>
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${r.is_passable ? 'bg-amber-500/20 text-amber-400' : 'bg-red-500/20 text-red-400'}`}>
@@ -177,7 +177,7 @@ export const DownstreamDamage: React.FC<DownstreamDamageProps> = ({ damageReport
         </div>
 
         {/* Compromised Bridges */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3 shadow-sm">
+        <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-5 space-y-3 shadow-sm">
           <span className="text-xs font-bold text-white uppercase tracking-wide">
             Critical Bridge Crossings Status
           </span>
@@ -197,7 +197,7 @@ export const DownstreamDamage: React.FC<DownstreamDamageProps> = ({ damageReport
                 </div>
               ))
             ) : (
-              <div className="bg-slate-950/60 p-4 rounded-lg border border-slate-800 text-center text-slate-400">
+              <div className="bg-[#16131F]/60 p-4 rounded-lg border border-[#806C79] text-center text-slate-400">
                 All Dikrong and tributary bridge structures operational and structurally sound.
               </div>
             )}

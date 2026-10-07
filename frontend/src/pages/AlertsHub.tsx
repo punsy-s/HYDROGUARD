@@ -83,7 +83,7 @@ export const AlertsHub: React.FC<AlertsHubProps> = ({
       </div>
 
       {actionMessage && (
-        <div className="bg-blue-950/40 border border-blue-500/40 text-blue-300 px-4 py-2 rounded-lg text-xs flex items-center justify-between">
+        <div className="bg-blue-950/40 border border-[#806C79]/40 text-blue-300 px-4 py-2 rounded-lg text-xs flex items-center justify-between">
           <span>{actionMessage}</span>
           <button onClick={() => setActionMessage(null)} className="text-slate-400 hover:text-white cursor-pointer">×</button>
         </div>
@@ -98,7 +98,7 @@ export const AlertsHub: React.FC<AlertsHubProps> = ({
               Official Warning Orders ({alerts.length})
             </span>
             {isOfficial ? (
-              <span className="text-xs text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-full font-semibold border border-blue-500/30 flex items-center space-x-1">
+              <span className="text-xs text-[#C1A0AC] bg-[#F0D9E4]/10 px-2.5 py-1 rounded-full font-semibold border border-[#806C79]/30 flex items-center space-x-1">
                 <UserCheck className="w-3.5 h-3.5" />
                 <span>Officer Command Mode Active</span>
               </span>
@@ -119,7 +119,7 @@ export const AlertsHub: React.FC<AlertsHubProps> = ({
                     className={`p-4 rounded-xl border space-y-3 transition ${
                       isCritical
                         ? 'bg-red-950/20 border-red-500/40'
-                        : 'bg-slate-900 border-slate-800'
+                        : 'bg-[#4A3F4B]    border-[#806C79]'
                     }`}
                   >
                     <div className="flex items-start justify-between">
@@ -135,24 +135,24 @@ export const AlertsHub: React.FC<AlertsHubProps> = ({
                         <h3 className="text-sm font-bold text-white mt-1">{alt.headline}</h3>
                       </div>
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
-                        isApproved ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-amber-500/20 text-amber-400'
+                        isApproved ? 'bg-emerald-500/20 text-[#20C7A2] border border-emerald-500/30' : 'bg-amber-500/20 text-amber-400'
                       }`}>
                         {alt.status}
                       </span>
                     </div>
 
-                    <p className="text-xs text-slate-300 leading-relaxed bg-slate-950/60 p-3 rounded-lg border border-slate-800/80">
+                    <p className="text-xs text-slate-300 leading-relaxed bg-[#16131F]/60 p-3 rounded-lg border border-[#806C79]/80">
                       {alt.message}
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-400">
                       <div>Issued By: <strong className="text-slate-200">{alt.issued_by}</strong></div>
-                      <div>Target Shelter: <strong className="text-cyan-400">{alt.nearest_shelter || 'NERIST Campus'}</strong></div>
+                      <div>Target Shelter: <strong className="text-[#C1A0AC]">{alt.nearest_shelter || 'NERIST Campus'}</strong></div>
                     </div>
 
                     {/* Official Authorization Actions */}
                     {isOfficial && !isApproved && (
-                      <div className="pt-2 border-t border-slate-800 flex items-center justify-end space-x-2">
+                      <div className="pt-2 border-t border-[#806C79] flex items-center justify-end space-x-2">
                         <button
                           onClick={() => handleApprove(alt.id, 'CANCELLED')}
                           className="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center space-x-1 cursor-pointer"
@@ -173,7 +173,7 @@ export const AlertsHub: React.FC<AlertsHubProps> = ({
                 );
               })
             ) : (
-              <div className="bg-slate-900 border border-slate-800 rounded-xl p-8 text-center text-xs text-slate-500">
+              <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-8 text-center text-xs text-slate-500">
                 No active flood warning orders. Catchment is within safe operational thresholds.
               </div>
             )}
@@ -183,9 +183,9 @@ export const AlertsHub: React.FC<AlertsHubProps> = ({
         {/* Right Col: Citizen Field Report Form & Feed */}
         <div className="space-y-5">
           {/* Submit Observation Form */}
-          <form onSubmit={handleReportSubmit} className="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3 shadow-sm">
+          <form onSubmit={handleReportSubmit} className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-4 space-y-3 shadow-sm">
             <span className="text-xs font-bold text-white uppercase tracking-wide flex items-center space-x-1.5">
-              <MessageSquare className="w-4 h-4 text-cyan-400" />
+              <MessageSquare className="w-4 h-4 text-[#C1A0AC]" />
               <span>Report Local Flooding / Road Block</span>
             </span>
 
@@ -198,7 +198,7 @@ export const AlertsHub: React.FC<AlertsHubProps> = ({
                   placeholder="e.g. T. Nabam"
                   value={reportForm.user_name}
                   onChange={(e) => setReportForm({ ...reportForm, user_name: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white text-xs mt-0.5 focus:outline-none"
+                  className="w-full bg-[#16131F] border border-[#806C79] rounded-lg p-2 text-white text-xs mt-0.5 focus:outline-none"
                 />
               </div>
 
@@ -209,7 +209,7 @@ export const AlertsHub: React.FC<AlertsHubProps> = ({
                   required
                   value={reportForm.village_name}
                   onChange={(e) => setReportForm({ ...reportForm, village_name: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white text-xs mt-0.5 focus:outline-none"
+                  className="w-full bg-[#16131F] border border-[#806C79] rounded-lg p-2 text-white text-xs mt-0.5 focus:outline-none"
                 />
               </div>
 
@@ -219,7 +219,7 @@ export const AlertsHub: React.FC<AlertsHubProps> = ({
                   <select
                     value={reportForm.report_type}
                     onChange={(e) => setReportForm({ ...reportForm, report_type: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white text-xs mt-0.5 focus:outline-none cursor-pointer"
+                    className="w-full bg-[#16131F] border border-[#806C79] rounded-lg p-2 text-white text-xs mt-0.5 focus:outline-none cursor-pointer"
                   >
                     <option value="Waterlogging">Waterlogging</option>
                     <option value="Road Blocked">Road Blocked</option>
@@ -232,7 +232,7 @@ export const AlertsHub: React.FC<AlertsHubProps> = ({
                   <select
                     value={reportForm.severity}
                     onChange={(e) => setReportForm({ ...reportForm, severity: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white text-xs mt-0.5 focus:outline-none cursor-pointer"
+                    className="w-full bg-[#16131F] border border-[#806C79] rounded-lg p-2 text-white text-xs mt-0.5 focus:outline-none cursor-pointer"
                   >
                     <option value="Moderate">Moderate</option>
                     <option value="High">High</option>
@@ -249,14 +249,14 @@ export const AlertsHub: React.FC<AlertsHubProps> = ({
                   placeholder="Water rising near culvert, cars unable to cross..."
                   value={reportForm.description}
                   onChange={(e) => setReportForm({ ...reportForm, description: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white text-xs mt-0.5 focus:outline-none"
+                  className="w-full bg-[#16131F] border border-[#806C79] rounded-lg p-2 text-white text-xs mt-0.5 focus:outline-none"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={submittingReport}
-                className="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs flex items-center justify-center space-x-1.5 transition cursor-pointer disabled:opacity-50"
+                className="w-full py-2 rounded-lg bg-[#F0D9E4] hover:bg-[#C1A0AC] text-white font-semibold text-xs flex items-center justify-center space-x-1.5 transition cursor-pointer disabled:opacity-50"
               >
                 <Send className="w-3.5 h-3.5" />
                 <span>{submittingReport ? 'Submitting...' : 'Submit Field Report'}</span>
@@ -265,7 +265,7 @@ export const AlertsHub: React.FC<AlertsHubProps> = ({
           </form>
 
           {/* Recent Field Reports Feed */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3 shadow-sm">
+          <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-4 space-y-3 shadow-sm">
             <span className="text-xs font-bold text-white uppercase tracking-wide">
               Recent Field Observations ({reports.length})
             </span>

@@ -38,9 +38,9 @@ export const LiveMonitoring: React.FC<LiveMonitoringProps> = ({ sensors, onRefre
         </div>
         <button
           onClick={onRefresh}
-          className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 flex items-center space-x-1.5 transition cursor-pointer"
+          className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-[#806C79] flex items-center space-x-1.5 transition cursor-pointer"
         >
-          <RefreshCw className="w-3.5 h-3.5 text-blue-400" />
+          <RefreshCw className="w-3.5 h-3.5 text-[#C1A0AC]" />
           <span>Poll Gauges</span>
         </button>
       </div>
@@ -56,8 +56,8 @@ export const LiveMonitoring: React.FC<LiveMonitoringProps> = ({ sensors, onRefre
               onClick={() => setSelectedSensorId(s.id)}
               className={`p-4 rounded-xl border transition cursor-pointer ${
                 isSelected 
-                  ? 'bg-slate-800/90 border-blue-500 shadow-md shadow-blue-500/10' 
-                  : 'bg-slate-900 border-slate-800 hover:border-slate-700'
+                  ? 'bg-slate-800/90 border-[#806C79] shadow-md shadow-blue-500/10' 
+                  : 'bg-[#4A3F4B]    border-[#806C79] hover:border-[#806C79]'
               }`}
             >
               <div className="flex items-start justify-between">
@@ -69,14 +69,14 @@ export const LiveMonitoring: React.FC<LiveMonitoringProps> = ({ sensors, onRefre
                 <div className={`w-2.5 h-2.5 rounded-full ${isOffline ? 'bg-slate-500' : 'bg-emerald-400 animate-pulse'}`} />
               </div>
 
-              <div className="mt-3 pt-2.5 border-t border-slate-800/80 grid grid-cols-3 gap-1 text-center">
+              <div className="mt-3 pt-2.5 border-t border-[#806C79]/80 grid grid-cols-3 gap-1 text-center">
                 <div>
                   <div className="text-[10px] text-slate-400">Rain</div>
                   <div className="text-xs font-bold text-white">{s.latest_reading?.rainfall_mm || 0} mm</div>
                 </div>
                 <div>
                   <div className="text-[10px] text-slate-400">Stage</div>
-                  <div className="text-xs font-bold text-cyan-400">{s.latest_reading?.water_level_m || 0} m</div>
+                  <div className="text-xs font-bold text-[#C1A0AC]">{s.latest_reading?.water_level_m || 0} m</div>
                 </div>
                 <div>
                   <div className="text-[10px] text-slate-400">Soil</div>
@@ -86,7 +86,7 @@ export const LiveMonitoring: React.FC<LiveMonitoringProps> = ({ sensors, onRefre
 
               <div className="mt-2.5 flex items-center justify-between text-[10px] text-slate-400">
                 <span className="flex items-center space-x-1">
-                  <Battery className="w-3 h-3 text-emerald-400" />
+                  <Battery className="w-3 h-3 text-[#20C7A2]" />
                   <span>{s.battery_level_pct}%</span>
                 </span>
                 <span>{s.is_simulated ? 'Simulated Telemetry' : 'Physical ESP32'}</span>
@@ -98,12 +98,12 @@ export const LiveMonitoring: React.FC<LiveMonitoringProps> = ({ sensors, onRefre
 
       {/* Selected Sensor Detailed Telemetry Hydrographs */}
       {selectedSensor && (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4 shadow-sm">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-5 space-y-4 shadow-sm">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-[#806C79] pb-3">
             <div>
               <div className="flex items-center space-x-2">
                 <span className="text-sm font-bold text-white">{selectedSensor.name}</span>
-                <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/30">
+                <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-[#F0D9E4]/10 text-[#C1A0AC] border border-[#806C79]/30">
                   {selectedSensor.device_id}
                 </span>
                 <span className="text-[10px] font-semibold text-slate-400 bg-slate-800 px-2 py-0.5 rounded">
@@ -123,7 +123,7 @@ export const LiveMonitoring: React.FC<LiveMonitoringProps> = ({ sensors, onRefre
           {/* Charts Row */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {/* 1. Rainfall Chart */}
-            <div className="bg-slate-950/60 rounded-xl p-3 border border-slate-800 space-y-2">
+            <div className="bg-[#16131F]/60 rounded-xl p-3 border border-[#806C79] space-y-2">
               <span className="text-xs font-semibold text-slate-300">Precipitation Rate (mm/hr)</span>
               <div className="h-44 w-full">
                 <ResponsiveContainer width="100%" height="100%">
@@ -138,7 +138,7 @@ export const LiveMonitoring: React.FC<LiveMonitoringProps> = ({ sensors, onRefre
             </div>
 
             {/* 2. River Stage Chart */}
-            <div className="bg-slate-950/60 rounded-xl p-3 border border-slate-800 space-y-2">
+            <div className="bg-[#16131F]/60 rounded-xl p-3 border border-[#806C79] space-y-2">
               <span className="text-xs font-semibold text-slate-300">River Water Stage (m)</span>
               <div className="h-44 w-full">
                 <ResponsiveContainer width="100%" height="100%">
@@ -153,7 +153,7 @@ export const LiveMonitoring: React.FC<LiveMonitoringProps> = ({ sensors, onRefre
             </div>
 
             {/* 3. Soil Moisture Chart */}
-            <div className="bg-slate-950/60 rounded-xl p-3 border border-slate-800 space-y-2">
+            <div className="bg-[#16131F]/60 rounded-xl p-3 border border-[#806C79] space-y-2">
               <span className="text-xs font-semibold text-slate-300">Volumetric Soil Moisture (%)</span>
               <div className="h-44 w-full">
                 <ResponsiveContainer width="100%" height="100%">

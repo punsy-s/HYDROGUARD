@@ -160,8 +160,8 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({
         <section className="space-y-4 2xl:col-span-2">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-500/10">
-                <Navigation className="h-5 w-5 text-cyan-400" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-500/20 bg-[#F0D9E4]/10">
+                <Navigation className="h-5 w-5 text-[#C1A0AC]" />
               </div>
 
               <div>
@@ -174,12 +174,12 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({
               </div>
             </div>
 
-            <span className="w-fit rounded-full border border-slate-700 bg-slate-900 px-3 py-1.5 text-[11px] font-medium text-slate-400">
+            <span className="w-fit rounded-full border border-[#806C79] bg-[#4A3F4B]    px-3 py-1.5 text-[11px] font-medium text-slate-400">
               Papum Pare & Lakhimpur Foothills • Leaflet 2D GIS
             </span>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-2 shadow-xl shadow-black/10">
+          <div className="overflow-hidden rounded-2xl border border-[#806C79] bg-[#4A3F4B]    p-2 shadow-xl shadow-black/10">
             <MapView
               boundaryGeoJson={boundaryGeoJson}
               riverGeoJson={riverGeoJson}
@@ -209,7 +209,7 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({
         {/* Right Side Panels */}
         <aside className="space-y-5">
           {/* Hydrograph Card */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 shadow-lg shadow-black/10">
+          <div className="rounded-2xl border border-[#806C79] bg-[#4A3F4B]   /80 p-5 shadow-lg shadow-black/10">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h2 className="text-sm font-bold text-white">
@@ -220,7 +220,7 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({
                 </p>
               </div>
 
-              <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-cyan-400">
+              <span className="rounded-full border border-cyan-500/20 bg-[#F0D9E4]/10 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-[#C1A0AC]">
                 [OBSERVED]
               </span>
             </div>
@@ -291,7 +291,7 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({
               </ResponsiveContainer>
             </div>
 
-            <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-800 pt-4">
+            <div className="mt-4 grid grid-cols-2 gap-3 border-t border-[#806C79] pt-4">
               <div>
                 <p className="text-[10px] font-medium uppercase tracking-wide text-slate-500">
                   Rate of Rise
@@ -305,7 +305,7 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({
                 <p className="text-[10px] font-medium uppercase tracking-wide text-slate-500">
                   Upstream Lead Time
                 </p>
-                <p className="mt-1 text-sm font-semibold text-cyan-400">
+                <p className="mt-1 text-sm font-semibold text-[#C1A0AC]">
                   ~{prediction?.warning_lead_time_min || 180} min
                 </p>
               </div>
@@ -324,8 +324,8 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({
                 </p>
               </div>
 
-              <div className="rounded-xl border border-cyan-500/20 bg-cyan-500/10 p-2.5">
-                <Navigation className="h-5 w-5 text-cyan-400" />
+              <div className="rounded-xl border border-cyan-500/20 bg-[#F0D9E4]/10 p-2.5">
+                <Navigation className="h-5 w-5 text-[#C1A0AC]" />
               </div>
             </div>
 
@@ -336,7 +336,7 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({
 
             <button
               onClick={() => onNavigate('evacuation')}
-              className="mt-5 flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-cyan-600 px-4 py-3 text-xs font-bold text-white shadow-lg shadow-cyan-950/30 transition hover:bg-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900"
+              className="mt-5 flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-cyan-600 px-4 py-3 text-xs font-bold text-white shadow-lg shadow-cyan-950/30 transition hover:bg-[#F0D9E4] focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900"
             >
               <span>Calculate Safe Evacuation Route</span>
               <ArrowUpRight className="h-4 w-4" />
@@ -344,7 +344,7 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({
           </div>
 
           {/* Critical Settlements */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 shadow-lg shadow-black/10">
+          <div className="rounded-2xl border border-[#806C79] bg-[#4A3F4B]   /80 p-5 shadow-lg shadow-black/10">
             <div className="mb-3 flex items-center justify-between">
               <div>
                 <h2 className="text-sm font-bold text-white">
@@ -374,7 +374,7 @@ export const MainDashboard: React.FC<MainDashboardProps> = ({
                     className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-semibold ${
                       v.flood_prone_zone.toLowerCase().includes('critical')
                         ? 'border border-red-500/20 bg-red-500/10 text-red-400'
-                        : 'border border-slate-700 bg-slate-800/70 text-slate-400'
+                        : 'border border-[#806C79] bg-slate-800/70 text-slate-400'
                     }`}
                   >
                     {v.flood_prone_zone.split('-')[0].trim()}

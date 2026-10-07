@@ -21,15 +21,15 @@ export const StatCard: React.FC<StatCardProps> = ({
   provenance
 }) => {
   const colorMap = {
-    blue: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-    emerald: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-    amber: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-    red: 'bg-red-500/10 text-red-400 border-red-500/20',
-    purple: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
-  };
+  blue: "bg-[#F0D9E4]/10 text-[#C1A0AC] border-cyan-500/20",
+  emerald: "bg-teal-500/10 text-teal-400 border-teal-500/20",
+  amber: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
+  red: "bg-rose-500/10 text-rose-400 border-rose-500/20",
+  purple: "bg-sky-500/10 text-sky-300 border-sky-500/20",
+ };
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between shadow-sm hover:border-slate-700 transition">
+    <div className="bg-[#4A3F4B]    border border-[#806C79] rounded-xl p-4 flex flex-col justify-between shadow-sm hover:border-[#806C79] transition">
       <div className="flex items-start justify-between">
         <div>
           <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">{title}</span>
@@ -43,7 +43,7 @@ export const StatCard: React.FC<StatCardProps> = ({
         </div>
       </div>
       
-      <div className="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px]">
+      <div className="mt-3 pt-2.5 border-t border-[#806C79]/80 flex items-center justify-between text-[11px]">
         <span className="text-slate-400 truncate">{subtitle || 'Telemetry stream active'}</span>
         {provenance && (
           <span className="text-[10px] font-semibold text-slate-400 bg-slate-800 px-1.5 py-0.5 rounded shrink-0">
