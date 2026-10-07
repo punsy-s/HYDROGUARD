@@ -83,7 +83,7 @@ Add your dashboard screenshot/GIF here:
 ![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python)
 ![Leaflet](https://img.shields.io/badge/Maps-Leaflet-199900?logo=leaflet)
 ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss)
-![Tests](https://img.shields.io/badge/tests-10%20passed-success)
+![Tests](https://img.shields.io/badge/tests-16%20passed-success)
 
 ------------------------------------------------------------------------
 
@@ -276,19 +276,24 @@ river stage, and flow velocity.
 
 ------------------------------------------------------------------------
 
-# 🌊 7. HEC-RAS 2D Flood Simulation
+# 🌊 7. HEC-RAS 2D Hydraulic Flood Simulation
 
-The hydraulic layer is designed to model:
+HydroGuard integrates a complete **2D hydraulic modeling component** based on USACE HEC-RAS 2D Shallow Water Equations (SWE) and 2D Diffusion Wave formulations:
 
--   Flood depth
--   Flood extent
--   Flow behaviour
--   Downstream propagation
--   Inundation areas
--   Flood arrival behaviour
+-   **Dual-Mode Execution**:
+    -   *Native HEC-RAS 6.x*: Automatically generates `.prj`, `.p01`, `.u01`, `.g01` project inputs, executes unsteady computations, and parses binary HDF5 output (`.p01.hdf`).
+    -   *Calibrated 2D Hydrodynamic Fallback*: Self-contained Python/Shapely hydrodynamic solver calibrated to the Dikrong basin geometry when HEC-RAS is not installed locally.
+-   **Outputs Produced**:
+    -   2D Water Depth ($h$) & Water Surface Elevation (WSE)
+    -   Flow Velocity field ($v$) & directional vector components $(u, v)$
+    -   Wave Celerity ($c = \frac{5}{3}v$) & time-of-arrival ($t_{arr}$)
+    -   Froude Number ($Fr$) & Defra / USACE Flood Hazard Index ($HR = d \cdot (v+0.5) + DF$)
+    -   Multi-timestep unsteady wave propagation ($T+0.5h \to T+6.0h$)
+    -   GeoJSON 2D Inundation depth bands and velocity vectors
+-   **Downstream Pipeline**: Direct synchronization with downstream village exposure, severed bridges, road submergence cutoff ($>0.30m$), and life-safety evacuation routing.
+-   **Project Export**: Direct export and download of USACE HEC-RAS 6.x project files for desktop analysis.
 
-HydroGuard includes a HEC-RAS adapter plus a hydrodynamic diffusion-wave
-fallback when native HEC-RAS execution is unavailable.
+For complete mathematical formulation and API references, see the [HEC-RAS 2D Technical Guide](docs/HECRAS_2D_GUIDE.md).
 
 ------------------------------------------------------------------------
 
