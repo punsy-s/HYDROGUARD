@@ -304,6 +304,18 @@ def init_database():
                         db.add(sim_sc)
                 db.commit()
 
+        # Refresh sensor heartbeats to now if stale so local demo starts in active state
+        now_dt = datetime.now(timezone.utc)
+        for s in db.query(Sensor).all():
+            if not s.last_heartbeat or (now_dt - s.last_heartbeat.replace(tzinfo=timezone.utc)).total_seconds() > 86400:
+                s.last_heartbeat = now_dt
+                s.status = "ACTIVE"
+
+        for r in db.query(Road).all():
+            r.current_water_depth_m = 0.0
+            r.is_closed = False
+        db.commit()
+
     finally:
         db.close()
 

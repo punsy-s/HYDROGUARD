@@ -255,6 +255,7 @@ export interface SystemHealth {
     hydraulic_engine: {
       active_adapter: string;
       native_hecras_detected: boolean;
+      active_solver_mode?: string;
     };
     weather_provider: {
       name: string;
@@ -271,3 +272,76 @@ export interface SystemHealth {
     simulations_executed: number;
   };
 }
+
+export interface HECRASEngineInfo {
+  native_hecras_available: boolean;
+  installed_version: string | null;
+  executable_path: string | null;
+  active_solver_engine: string;
+  active_solver_mode: string;
+  supported_equations: string[];
+  supported_catchments: string[];
+  mesh_resolution_meters: number;
+  disclaimer: string;
+}
+
+export interface HECRASReachResult {
+  reach_name: string;
+  station_id: string;
+  elevation_m: number;
+  water_depth_m: number;
+  water_surface_elevation_m: number;
+  velocity_mps: number;
+  froude_number: number;
+  hazard_rating: string;
+  arrival_time_hrs: number;
+  time_to_peak_hrs: number;
+}
+
+export interface HECRASVelocityVector {
+  id: string;
+  reach: string;
+  latitude: number;
+  longitude: number;
+  velocity_mps: number;
+  direction_deg: number;
+  u_mps: number;
+  v_mps: number;
+}
+
+export interface HECRASTimestepData {
+  timestep_hrs: number;
+  flood_stage: string;
+  total_volume_m3: number;
+  active_flooded_area_sq_km: number;
+  max_reach_depth_m: number;
+  reach_depths: Record<string, number>;
+}
+
+export interface HECRASResults {
+  status: string;
+  solver_engine: string;
+  is_native_hecras: boolean;
+  provenance_tag: string;
+  job_id: string;
+  catchment_id: string;
+  peak_discharge_cumecs: number;
+  manning_n_channel: number;
+  manning_n_floodplain: number;
+  equation_set: string;
+  embankment_breach_simulated: boolean;
+  max_flood_depth_m: number;
+  peak_velocity_mps: number;
+  flooded_area_sq_km: number;
+  wave_celerity_kmh: number;
+  mesh_cell_count: number;
+  computational_grid_resolution_m: number;
+  mass_balance_error_percent: number;
+  reach_profiles: HECRASReachResult[];
+  reach_depths: Record<string, number>;
+  flood_polygons: any[];
+  velocity_vectors: HECRASVelocityVector[];
+  simulation_timesteps: HECRASTimestepData[];
+  spatial_geojson: any;
+}
+

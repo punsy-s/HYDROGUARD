@@ -94,6 +94,59 @@ class SimulationTriggerRequest(BaseModel):
     custom_inflow_discharge_cumecs: Optional[float] = None
     solver_mode: Optional[str] = "AUTO"  # AUTO, NATIVE_HECRAS, CALIBRATED_SOLVER
 
+class HECRASSimulationRequest(BaseModel):
+    catchment_id: str = Field("CATCH-DIKRONG-01", description="Catchment ID")
+    scenario_id: Optional[str] = Field(None, description="Preset scenario ID")
+    custom_inflow_discharge_cumecs: Optional[float] = Field(1450.0, ge=10.0, le=25000.0, description="Upstream boundary peak inflow Q (m3/s)")
+    manning_n_channel: Optional[float] = Field(0.038, ge=0.015, le=0.150, description="Main channel Manning roughness n")
+    manning_n_floodplain: Optional[float] = Field(0.065, ge=0.020, le=0.250, description="Overbank floodplain Manning roughness n")
+    equation_set: Optional[str] = Field("DIFFUSION_WAVE", description="DIFFUSION_WAVE or FULL_MOMENTUM_SWE")
+    computation_interval_sec: Optional[int] = Field(60, ge=1, le=3600, description="Computational timestep Delta t in seconds")
+    simulation_duration_hours: Optional[float] = Field(6.0, ge=1.0, le=72.0, description="Simulation duration in hours")
+    enable_embankment_breach: Optional[bool] = Field(False, description="Simulate structural failure of Pichola left embankment")
+    solver_mode: Optional[str] = Field("AUTO", description="AUTO, FORCE_NATIVE, or FORCE_FALLBACK")
+
+class HECRASEngineInfo(BaseModel):
+    native_hecras_available: bool
+    installed_version: Optional[str]
+    executable_path: Optional[str]
+    active_solver_engine: str
+    active_solver_mode: str
+    supported_equations: List[str]
+    supported_catchments: List[str]
+    mesh_resolution_meters: int
+    disclaimer: str
+
+class HECRASReachResult(BaseModel):
+    reach_name: str
+    station_id: str
+    elevation_m: float
+    water_depth_m: float
+    water_surface_elevation_m: float
+    velocity_mps: float
+    froude_number: float
+    hazard_rating: str
+    arrival_time_hrs: float
+    time_to_peak_hrs: float
+
+class HECRASVelocityVector(BaseModel):
+    id: str
+    reach: str
+    latitude: float
+    longitude: float
+    velocity_mps: float
+    direction_deg: float
+    u_mps: float
+    v_mps: float
+
+class HECRASTimestepData(BaseModel):
+    timestep_hrs: float
+    flood_stage: str
+    total_volume_m3: float
+    active_flooded_area_sq_km: float
+    max_reach_depth_m: float
+    reach_depths: Dict[str, float]
+
 class SimulationJobResponse(BaseModel):
     job_id: str
     catchment_id: str

@@ -6,13 +6,13 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.security import require_role
 from app.models.models import AuditLog, Sensor, User, SimulationJob, Catchment
-from app.services.hecras_adapter import get_simulation_adapter
+from app.services.hecras_adapter import get_simulation_adapter, get_hecras_engine_info
 
 router = APIRouter(prefix="/admin", tags=["System Administration"])
 
 @router.get("/system-health")
 def get_system_health(db: Session = Depends(get_db)):
-    adapter = get_simulation_adapter()
+    engine_info = get_hecras_engine_info()
     sensors_count = db.query(Sensor).count()
     users_count = db.query(User).count()
     jobs_count = db.query(SimulationJob).count()
@@ -27,8 +27,9 @@ def get_system_health(db: Session = Depends(get_db)):
         },
         "adapters": {
             "hydraulic_engine": {
-                "active_adapter": adapter.get_installed_version(),
-                "native_hecras_detected": adapter.is_available() and "HEC-RAS 2D Native" in adapter.get_installed_version()
+                "active_adapter": engine_info["active_solver_engine"],
+                "native_hecras_detected": engine_info["native_hecras_available"],
+                "active_solver_mode": engine_info["active_solver_mode"]
             },
             "weather_provider": {
                 "name": "Open-Meteo API (WMO Certified)",

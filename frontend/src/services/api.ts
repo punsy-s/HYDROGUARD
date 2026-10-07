@@ -92,6 +92,85 @@ export async function switchScenario(scenarioId: string): Promise<any> {
   return res.json();
 }
 
+export async function fetchHECRASEngineInfo(): Promise<any> {
+  const res = await fetch(`${API_BASE}/simulations/hecras/engine-info`);
+  if (!res.ok) throw new Error('Failed to fetch HEC-RAS engine info');
+  return res.json();
+}
+
+export async function runHECRAS2DSimulation(params: {
+  catchment_id?: string;
+  scenario_id?: string;
+  custom_inflow_discharge_cumecs?: number;
+  manning_n_channel?: number;
+  manning_n_floodplain?: number;
+  equation_set?: string;
+  computation_interval_sec?: number;
+  simulation_duration_hours?: number;
+  enable_embankment_breach?: boolean;
+  solver_mode?: string;
+}): Promise<any> {
+  const res = await fetch(`${API_BASE}/simulations/hecras/run`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      catchment_id: params.catchment_id || 'CATCH-DIKRONG-01',
+      scenario_id: params.scenario_id,
+      custom_inflow_discharge_cumecs: params.custom_inflow_discharge_cumecs,
+      manning_n_channel: params.manning_n_channel,
+      manning_n_floodplain: params.manning_n_floodplain,
+      equation_set: params.equation_set || 'DIFFUSION_WAVE',
+      computation_interval_sec: params.computation_interval_sec || 60,
+      simulation_duration_hours: params.simulation_duration_hours || 6.0,
+      enable_embankment_breach: params.enable_embankment_breach || false,
+      solver_mode: params.solver_mode || 'AUTO'
+    })
+  });
+  if (!res.ok) throw new Error('Failed to launch HEC-RAS 2D simulation');
+  return res.json();
+}
+
+export async function fetchHECRASJobStatus(jobId: string): Promise<any> {
+  const res = await fetch(`${API_BASE}/simulations/hecras/jobs/${jobId}`);
+  if (!res.ok) throw new Error('Failed to fetch HEC-RAS job status');
+  return res.json();
+}
+
+export async function fetchHECRASJobResults(jobId: string): Promise<any> {
+  const res = await fetch(`${API_BASE}/simulations/hecras/jobs/${jobId}/results`);
+  if (!res.ok) throw new Error('Failed to fetch HEC-RAS job results');
+  return res.json();
+}
+
+export async function applyHECRASToImpact(jobId: string): Promise<any> {
+  const res = await fetch(`${API_BASE}/simulations/hecras/jobs/${jobId}/apply-to-impact`, {
+    method: 'POST'
+  });
+  if (!res.ok) throw new Error('Failed to apply HEC-RAS simulation to downstream impact');
+  return res.json();
+}
+
+export async function exportHECRASProject(params?: {
+  catchmentId?: string;
+  peakDischarge?: number;
+  manningNChannel?: number;
+  manningNFloodplain?: number;
+  equationSet?: string;
+  enableBreach?: boolean;
+}): Promise<any> {
+  const query = new URLSearchParams({
+    catchment_id: params?.catchmentId || 'CATCH-DIKRONG-01',
+    peak_discharge_cumecs: String(params?.peakDischarge || 1450),
+    manning_n_channel: String(params?.manningNChannel || 0.038),
+    manning_n_floodplain: String(params?.manningNFloodplain || 0.065),
+    equation_set: params?.equationSet || 'DIFFUSION_WAVE',
+    enable_breach: String(params?.enableBreach || false)
+  });
+  const res = await fetch(`${API_BASE}/simulations/hecras/export-project?${query.toString()}`);
+  if (!res.ok) throw new Error('Failed to export HEC-RAS project files');
+  return res.json();
+}
+
 export async function triggerSimulation(catchmentId: string, scenarioId?: string, discharge?: number): Promise<any> {
   const res = await fetch(`${API_BASE}/simulations/run`, {
     method: 'POST',

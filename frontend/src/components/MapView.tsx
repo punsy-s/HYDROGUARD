@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
-import { Layers, Eye, EyeOff, Navigation, ZoomIn, ZoomOut } from 'lucide-react';
-import { Village, Sensor, Shelter, EvacuationRouteOption } from '../types';
+import { Layers, Eye, EyeOff, Navigation, ZoomIn, ZoomOut, ArrowUpRight } from 'lucide-react';
+import { Village, Sensor, Shelter, EvacuationRouteOption, HECRASVelocityVector } from '../types';
 
 interface MapViewProps {
   boundaryGeoJson?: any;
@@ -11,6 +11,7 @@ interface MapViewProps {
   shelters?: Shelter[];
   roads?: any[];
   floodPolygons?: any[];
+  velocityVectors?: HECRASVelocityVector[];
   selectedRoute?: EvacuationRouteOption | null;
   onSelectVillage?: (village: Village) => void;
   onSelectShelter?: (shelter: Shelter) => void;
@@ -25,6 +26,7 @@ export const MapView: React.FC<MapViewProps> = ({
   shelters = [],
   roads = [],
   floodPolygons = [],
+  velocityVectors = [],
   selectedRoute = null,
   onSelectVillage,
   onSelectShelter,
@@ -37,6 +39,7 @@ export const MapView: React.FC<MapViewProps> = ({
   const boundaryLayerRef = useRef<L.LayerGroup | null>(null);
   const riverLayerRef = useRef<L.LayerGroup | null>(null);
   const floodLayerRef = useRef<L.LayerGroup | null>(null);
+  const velocityLayerRef = useRef<L.LayerGroup | null>(null);
   const roadsLayerRef = useRef<L.LayerGroup | null>(null);
   const villagesLayerRef = useRef<L.LayerGroup | null>(null);
   const sensorsLayerRef = useRef<L.LayerGroup | null>(null);
@@ -48,6 +51,7 @@ export const MapView: React.FC<MapViewProps> = ({
     boundary: true,
     river: true,
     flood: true,
+    velocity: true,
     roads: true,
     villages: true,
     sensors: true,
@@ -75,6 +79,7 @@ export const MapView: React.FC<MapViewProps> = ({
     boundaryLayerRef.current = L.layerGroup().addTo(map);
     riverLayerRef.current = L.layerGroup().addTo(map);
     floodLayerRef.current = L.layerGroup().addTo(map);
+    velocityLayerRef.current = L.layerGroup().addTo(map);
     roadsLayerRef.current = L.layerGroup().addTo(map);
     villagesLayerRef.current = L.layerGroup().addTo(map);
     sensorsLayerRef.current = L.layerGroup().addTo(map);
@@ -156,17 +161,58 @@ export const MapView: React.FC<MapViewProps> = ({
 
           polygon.bindPopup(`
             <div style="font-family: sans-serif; font-size: 12px; color: #0f172a;">
-              <strong>2D Flood Hazard Zone</strong><br/>
-              Reach: ${fp.reach || 'Dikrong'}<br/>
-              Max Depth: ${depth}m<br/>
+              <strong>HEC-RAS 2D Inundation Zone</strong><br/>
+              Reach: <strong>${fp.reach || 'Dikrong Basin'}</strong><br/>
+              Max Water Depth: <span style="color:${fillColor}; font-weight:bold;">${depth}m</span><br/>
+              Flow Velocity: ${fp.velocity_mps || 'N/A'} m/s<br/>
               Wave Arrival: ${fp.arrival_time_hrs || 1.5} hrs<br/>
-              Severity: ${fp.severity || 'High'}
+              Hazard Level: <strong>${fp.hazard_rating || fp.severity || 'Critical'}</strong>
             </div>
           `);
         }
       });
     }
   }, [floodPolygons, layersVisible.flood]);
+
+  // Update Velocity Vectors
+  useEffect(() => {
+    if (!velocityLayerRef.current) return;
+    velocityLayerRef.current.clearLayers();
+
+    if (layersVisible.velocity && velocityVectors.length > 0) {
+      velocityVectors.forEach((v) => {
+        const speed = v.velocity_mps || 1.0;
+        const color = speed > 3.0 ? '#ef4444' : speed > 1.5 ? '#f97316' : '#06b6d4';
+        
+        const arrowHtml = `
+          <div style="transform: rotate(${v.direction_deg}deg); display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: rgba(15,23,42,0.85); border: 1.5px solid ${color}; border-radius: 50%; box-shadow: 0 0 6px ${color}66;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="19" x2="12" y2="5"></line>
+              <polyline points="5 12 12 5 19 12"></polyline>
+            </svg>
+          </div>
+        `;
+
+        const icon = L.divIcon({
+          html: arrowHtml,
+          className: 'custom-velocity-arrow',
+          iconSize: [28, 28],
+          iconAnchor: [14, 14]
+        });
+
+        const marker = L.marker([v.latitude, v.longitude], { icon }).addTo(velocityLayerRef.current!);
+        marker.bindPopup(`
+          <div style="font-family: sans-serif; font-size: 12px; color: #0f172a;">
+            <strong>2D Flow Velocity Vector</strong><br/>
+            Reach: <strong>${v.reach}</strong><br/>
+            Magnitude: <span style="color: ${color}; font-weight: bold;">${speed.toFixed(2)} m/s (${(speed * 3.6).toFixed(1)} km/h)</span><br/>
+            Flow Direction: ${v.direction_deg}° Azimuth<br/>
+            Vector Components: u = ${v.u_mps} m/s, v = ${v.v_mps} m/s
+          </div>
+        `);
+      });
+    }
+  }, [velocityVectors, layersVisible.velocity]);
 
   // Update Roads Layer
   useEffect(() => {
@@ -367,6 +413,12 @@ export const MapView: React.FC<MapViewProps> = ({
             <span>Flood 2D</span>
           </button>
           <button 
+            onClick={() => toggleLayer('velocity')}
+            className={`flex items-center space-x-1 px-1.5 py-0.5 rounded transition ${layersVisible.velocity ? 'text-cyan-400 bg-cyan-500/10' : 'text-slate-500'}`}
+          >
+            <span>2D Velocity</span>
+          </button>
+          <button 
             onClick={() => toggleLayer('roads')}
             className={`flex items-center space-x-1 px-1.5 py-0.5 rounded transition ${layersVisible.roads ? 'text-emerald-400 bg-emerald-500/10' : 'text-slate-500'}`}
           >
@@ -399,6 +451,10 @@ export const MapView: React.FC<MapViewProps> = ({
         <div className="flex items-center space-x-2">
           <span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block"></span>
           <span>Inundation Depth &gt; 1.0m (Hazard)</span>
+        </div>
+        <div className="flex items-center space-x-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block"></span>
+          <span>2D Flow Velocity Vector (m/s)</span>
         </div>
         <div className="flex items-center space-x-2">
           <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span>

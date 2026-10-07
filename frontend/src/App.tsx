@@ -181,7 +181,15 @@ export function App() {
             <FloodSimulation
               scenarios={scenarios}
               activeScenario={activeScenario}
+              boundaryGeoJson={boundaryGeoJson}
+              riverGeoJson={riverGeoJson}
+              villages={villages}
+              sensors={sensors}
+              shelters={shelters}
+              roads={roads}
               onScenarioSwitched={handleScenarioChange}
+              onNavigateToDamage={() => setActivePage('damage')}
+              onNavigateToEvacuation={() => setActivePage('evacuation')}
             />
           )}
 
