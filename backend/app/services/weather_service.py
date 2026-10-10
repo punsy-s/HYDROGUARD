@@ -66,7 +66,7 @@ def get_catchment_weather(lat: float = 27.15, lon: float = 93.75, force_refresh:
 
     # Fallback to realistic offline monsoon meteorological readings
     fallback_result = {
-        "provider": "TerraGuard Calibrated Monsoon Met Model (Offline Fallback)",
+        "provider": "HydroGuard Calibrated Monsoon Met Model (Offline Fallback)",
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "current_temp_c": 23.5,
         "current_humidity_pct": 88.0,

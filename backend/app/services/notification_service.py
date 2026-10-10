@@ -19,7 +19,7 @@ class NotificationGatewayAdapter:
             "channel": "SMS",
             "recipient": phone_number,
             "status": "DELIVERED",
-            "provider": "TerraGuard Telecom Gateway (C-DOT / Fast2SMS Compatible)",
+            "provider": "HydroGuard Telecom Gateway (C-DOT / Fast2SMS Compatible)",
             "timestamp": datetime.now(timezone.utc).isoformat()
         }
 

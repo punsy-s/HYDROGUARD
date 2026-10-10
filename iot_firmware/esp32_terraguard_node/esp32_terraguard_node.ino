@@ -1,6 +1,6 @@
 /*
  * ==============================================================================
- * TerraGuard NE – ESP32 Edge Hydro-Meteorological Monitoring Station
+ * HydroGuard – ESP32 Edge Hydro-Meteorological Monitoring Station
  * Target: ESP32-WROOM-32 / ESP32-DevKitC
  * Sensors:
  *   - Pronamic / Davis Tipping Bucket Rain Gauge (Reed Switch on GPIO 13)
@@ -98,7 +98,7 @@ float readBatteryPercentage() {
     return constrain(pct, 0.0f, 100.0f);
 }
 
-// Transmit JSON telemetry payload to TerraGuard Backend
+// Transmit JSON telemetry payload to HydroGuard Backend
 bool transmitTelemetry(float rainMm, float soilMoisture, float waterLevel, float batteryPct) {
     if (WiFi.status() != WL_CONNECTED) {
         Serial.println("[ERR] Wi-Fi disconnected. Buffering reading.");
@@ -143,7 +143,7 @@ void setup() {
     Serial.begin(115200);
     delay(500);
     Serial.println("\n==========================================");
-    Serial.println(" TerraGuard NE - ESP32 HydroMet Station");
+    Serial.println(" HydroGuard - ESP32 HydroMet Station");
     Serial.println("==========================================");
 
     // Initialize Watchdog

@@ -1,5 +1,5 @@
 # ==========================================
-# TerraGuard NE Frontend Dockerfile
+# HydroGuard Frontend Dockerfile
 # ==========================================
 # Build stage
 FROM node:20-alpine AS build

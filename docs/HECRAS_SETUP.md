@@ -27,4 +27,4 @@ When HEC-RAS is not present on the host system:
   ```
   PROVENANCE: SIMULATED — FALLBACK MODEL
   ```
-- **Integrity Rule**: HydroGuard never falsely misrepresents fallback results as native HEC-RAS computations.
+- **Integrity Rule**: HydroGuardver falsely misrepresents fallback results as native HEC-RAS computations.

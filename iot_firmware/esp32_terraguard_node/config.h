@@ -2,11 +2,11 @@
 #define CONFIG_H
 
 // ==========================================
-// TerraGuard NE - ESP32 Node Configuration
+// HydroGuard - ESP32 Node Configuration
 // ==========================================
 
 // Wi-Fi Credentials (or GSM / LoRaWAN gateway)
-#define WIFI_SSID           "TerraGuard_Mesh_Gateway"
+#define WIFI_SSID           "HydroGuard_Mesh_Gateway"
 #define WIFI_PASSWORD       "DikrongSafe2026"
 
 // Backend Telemetry Server

@@ -3,16 +3,16 @@ from typing import List
 from pydantic import BaseModel
 
 class Settings(BaseModel):
-    PROJECT_NAME: str = "TerraGuard NE"
+    PROJECT_NAME: str = "HydroGuard"
     VERSION: str = "1.0.0"
     API_V1_STR: str = "/api"
     
     # Environment & Database
     ENV: str = os.getenv("ENV", "development")
-    DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./terraguard.db")
+    DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./HydroGuard.db")
     
     # JWT Security
-    SECRET_KEY: str = os.getenv("SECRET_KEY", "terraguard_super_secret_production_key_dikrong_2026")
+    SECRET_KEY: str = os.getenv("SECRET_KEY", "HydroGuard_super_secret_production_key_dikrong_2026")
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 1 day
     

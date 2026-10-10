@@ -4,17 +4,17 @@ services:
   # 1. PostGIS Database
   db:
     image: postgis/postgis:15-3.3
-    container_name: terraguard-postgis
+    container_name: HydroGuard-postgis
     environment:
-      POSTGRES_USER: terraguard_admin
-      POSTGRES_PASSWORD: terraguard_secure_pass_2026
-      POSTGRES_DB: terraguard_db
+      POSTGRES_USER: HydroGuard_admin
+      POSTGRES_PASSWORD: HydroGuard_secure_pass_2026
+      POSTGRES_DB: HydroGuard_db
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U terraguard_admin -d terraguard_db"]
+      test: ["CMD-SHELL", "pg_isready -U HydroGuard_admin -d HydroGuard_db"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -22,7 +22,7 @@ services:
   # 2. Redis Cache & Async Message Broker
   redis:
     image: redis:7-alpine
-    container_name: terraguard-redis
+    container_name: HydroGuard-redis
     ports:
       - "6379:6379"
     volumes:
@@ -33,11 +33,11 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: terraguard-backend
+    container_name: HydroGuard-backend
     environment:
       ENV: production
-      DATABASE_URL: postgresql+psycopg2://terraguard_admin:terraguard_secure_pass_2026@db:5432/terraguard_db
-      SECRET_KEY: terraguard_super_secret_production_key_dikrong_2026
+      DATABASE_URL: postgresql+psycopg2://HydroGuard_admin:HydroGuard_secure_pass_2026@db:5432/HydroGuard_db
+      SECRET_KEY: HydroGuard_super_secret_production_key_dikrong_2026
       OPEN_METEO_BASE_URL: https://api.open-meteo.com/v1/forecast
       ENABLE_HECRAS_NATIVE: "false"
     ports:
@@ -53,7 +53,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: terraguard-frontend
+    container_name: HydroGuard-frontend
     ports:
       - "80:80"
     depends_on:

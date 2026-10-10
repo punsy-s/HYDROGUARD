@@ -1,6 +1,6 @@
 # ESP32 Edge Hydro-Meteorological Monitoring Station – Wiring & Setup Guide
 
-**TerraGuard NE Flash Flood Early Warning Network**  
+**HydroGuard Flash Flood Early Warning Network**  
 *Target Board: ESP32-WROOM-32 / DevKitC v4*
 
 ---
@@ -80,6 +80,6 @@
 2. Install **ESP32 by Espressif Systems** via Board Manager.
 3. Select Board: `ESP32 Dev Module`.
 4. Set Flash Frequency: `80MHz`, Upload Speed: `921600`.
-5. Open `esp32_terraguard_node.ino`.
+5. Open `esp32_HydroGuard_node.ino`.
 6. Update `WIFI_SSID`, `WIFI_PASSWORD`, `BACKEND_HOST`, and `SENSOR_API_KEY` in `config.h`.
 7. Click **Upload**. Open Serial Monitor at **115200 baud** to verify live telemetry transmissions.

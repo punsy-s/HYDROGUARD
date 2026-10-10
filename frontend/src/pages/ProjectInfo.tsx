@@ -11,7 +11,7 @@ export const ProjectInfo: React.FC = () => {
           <span>Project Methodology, Science & Engineering Disclaimers</span>
         </h1>
         <p className="text-xs text-slate-400">
-          TerraGuard NE – Architectural specification, hydraulic formulas, and data provenance standards
+          HydroGuard – Architectural specification, hydraulic formulas, and data provenance standards
         </p>
       </div>
 
@@ -23,7 +23,7 @@ export const ProjectInfo: React.FC = () => {
         </div>
         <p className="text-xs text-slate-400 leading-relaxed">
           To ensure emergency incident commanders and citizens are never misled by simulated or unverified numbers, 
-          every data element presented in TerraGuard NE is strictly classified under one of the following five tags:
+          every data element presented in HydroGuard is strictly classified under one of the following five tags:
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">

@@ -19,7 +19,7 @@ def init_database():
                 User(
                     id="USR-ADMIN-01",
                     username="admin",
-                    email="admin@terraguard.gov.in",
+                    email="admin@HydroGuard.gov.in",
                     hashed_password=hash_password("Admin@123"),
                     full_name="Dr. Arvind Sharma",
                     role="ADMIN",
@@ -321,4 +321,4 @@ def init_database():
 
 if __name__ == "__main__":
     init_database()
-    print("TerraGuard NE database initialized and seeded successfully.")
+    print("HydroGuard database initialized and seeded successfully.")
