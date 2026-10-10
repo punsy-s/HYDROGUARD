@@ -69,11 +69,19 @@ export const MapView: React.FC<MapViewProps> = ({
       zoomControl: false,
     });
 
-    // Dark Matter basemap tiles (CartoDB)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap contributors',
-      maxZoom: 18,
-    }).addTo(map);
+   const mapTilerKey = import.meta.env.VITE_MAPTILER_KEY;
+   if (!mapTilerKey) {
+    console.error('Missing VITE_MAPTILER_KEY in frontend/.env');
+  }
+  L.tileLayer(
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+   {
+     attribution:
+      'Tiles &copy; Esri',
+      maxZoom: 19,
+    }
+  ).addTo(map);
+
 
     // Initialize LayerGroups
     boundaryLayerRef.current = L.layerGroup().addTo(map);
